@@ -2,7 +2,7 @@
   "devDependencies": {
     "typescript": "^5.3.3"
   },
-  "name": "supaQbase",
+  "name": "supa-q-base-ts",
   "license": "MIT",
-  
+  "description": "supa-Q-base provides type safety to all Queries made with supabase-js"
 }
