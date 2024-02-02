@@ -1,8 +1,19 @@
 {
   "devDependencies": {
+    "@changesets/cli": "^2.27.1",
+    "tsup": "^8.0.1",
     "typescript": "^5.3.3"
   },
   "name": "supa-q-base-ts",
   "license": "MIT",
-  "description": "supa-Q-base provides type safety to all Queries made with supabase-js"
+  "description": "supa-Q-base provides type safety to all Queries made with supabase-js",
+  "scripts": {
+    "build": "tsup index.ts --format cjs,esm --dts",
+    "release": "pnpm run build && changeset publish",
+    "lint": "tsc"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "version": "0.0.1"
 }
