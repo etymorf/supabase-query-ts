@@ -4,23 +4,31 @@
     "pnpm": "^8.15.1",
     "postgrest-js": "1.0.0-rc2",
     "supabase": "^1.136.3",
+    "ts-generate-schema": "^2.1.0",
     "tsup": "^8.0.1",
     "type-fest": "^4.11.0",
     "typescript": "^5.3.3"
   },
+  "type": "module",
   "name": "supa-q-base-ts",
   "license": "MIT",
   "description": "supa-Q-base provides type safety to all Queries made with supabase-js",
   "scripts": {
     "build": "tsup index.ts --format cjs,esm --dts",
     "release": "pnpm run build && changeset publish",
-    "lint": "tsc"
+    "lint": "tsc",
+    "gen-docs": "cd src && tsc supagendocs.ts && node supagendocs.js supabasegentypestypescripts.ts"
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "version": "0.0.1",
   "dependencies": {
-    "@supabase/supabase-js": "^2.39.3"
+    "@babel/parser": "^7.24.0",
+    "@supabase/supabase-js": "^2.39.3",
+    "recast": "^0.23.5",
+    "safe-json-stringify": "^1.2.0",
+    "ts-morph": "^21.0.1",
+    "typescript-json-schema": "^0.63.0"
   }
 }

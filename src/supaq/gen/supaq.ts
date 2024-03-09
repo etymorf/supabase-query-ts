@@ -6,11 +6,11 @@ import { PostgrestFilterBuilder, PostgrestSingleResponse } from '@supabase/postg
 // import { SupabaseClient } from '@supabase/supabase-js';
 
 // from SupaQ
-import arr2obj from './helpers/arr2obj.ts';
-import type { Parsed } from './suparse.ts';
+import arr2obj from '../helpers/arr2obj.ts';
+import type { Parsed } from '../suparse.ts';
 
 // set by user
-import supa from './supabase.ts';
+import supa from '../supabase.ts';
 
 export type Json =
   | string
@@ -1176,25 +1176,25 @@ export type Database = {
         }[]
       }
       get_or_insert_def:
-      | {
-        Args: {
-          fr: string
-          en: string
-          de: string
-        }
-        Returns: undefined
-      }
-      | {
-        Args: {
-          fr?: string
-          en?: string
-          de?: string
-          eo?: string
-          it?: string
-          es?: string
-        }
-        Returns: undefined
-      }
+        | {
+            Args: {
+              fr: string
+              en: string
+              de: string
+            }
+            Returns: undefined
+          }
+        | {
+            Args: {
+              fr?: string
+              en?: string
+              de?: string
+              eo?: string
+              it?: string
+              es?: string
+            }
+            Returns: undefined
+          }
       get_or_insert_def_1: {
         Args: {
           fr?: string
@@ -1251,21 +1251,21 @@ export type Database = {
         Returns: unknown
       }
       get_words_to_study:
-      | {
-        Args: {
-          user_param: number
-          theme_param: string
-        }
-        Returns: unknown
-      }
-      | {
-        Args: {
-          user_param: number
-          theme_param: string
-          limit_param?: number
-        }
-        Returns: unknown
-      }
+        | {
+            Args: {
+              user_param: number
+              theme_param: string
+            }
+            Returns: unknown
+          }
+        | {
+            Args: {
+              user_param: number
+              theme_param: string
+              limit_param?: number
+            }
+            Returns: unknown
+          }
       get_words_to_study_2: {
         Args: {
           user_param: number
@@ -1283,22 +1283,22 @@ export type Database = {
         Returns: unknown
       }
       get_words_to_study_4:
-      | {
-        Args: {
-          user_param: number
-          theme_param: string
-          limit_param?: number
-        }
-        Returns: unknown
-      }
-      | {
-        Args: {
-          user_param: string
-          theme_param: string
-          limit_param?: number
-        }
-        Returns: unknown
-      }
+        | {
+            Args: {
+              user_param: number
+              theme_param: string
+              limit_param?: number
+            }
+            Returns: unknown
+          }
+        | {
+            Args: {
+              user_param: string
+              theme_param: string
+              limit_param?: number
+            }
+            Returns: unknown
+          }
       get_words_to_study_5: {
         Args: {
           user_param: string
@@ -1405,78 +1405,78 @@ export type Database = {
 
 export type Tables<
   PublicTableNameOrOptions extends
-  | keyof (Database["public"]["Tables"] & Database["public"]["Views"])
-  | { schema: keyof Database },
+    | keyof (Database["public"]["Tables"] & Database["public"]["Views"])
+    | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-  ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
-    Database[PublicTableNameOrOptions["schema"]]["Views"])
-  : never = never
+    ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
+        Database[PublicTableNameOrOptions["schema"]]["Views"])
+    : never = never
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
-    Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+      Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
       Row: infer R
     }
-  ? R
-  : never
+    ? R
+    : never
   : PublicTableNameOrOptions extends keyof (Database["public"]["Tables"] &
-    Database["public"]["Views"])
+      Database["public"]["Views"])
   ? (Database["public"]["Tables"] &
-    Database["public"]["Views"])[PublicTableNameOrOptions] extends {
+      Database["public"]["Views"])[PublicTableNameOrOptions] extends {
       Row: infer R
     }
-  ? R
-  : never
+    ? R
+    : never
   : never
 
 export type TablesInsert<
   PublicTableNameOrOptions extends
-  | keyof Database["public"]["Tables"]
-  | { schema: keyof Database },
+    | keyof Database["public"]["Tables"]
+    | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-  ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-  : never = never
+    ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
+    : never = never
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-    Insert: infer I
-  }
-  ? I
-  : never
+      Insert: infer I
+    }
+    ? I
+    : never
   : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
   ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-    Insert: infer I
-  }
-  ? I
-  : never
+      Insert: infer I
+    }
+    ? I
+    : never
   : never
 
 export type TablesUpdate<
   PublicTableNameOrOptions extends
-  | keyof Database["public"]["Tables"]
-  | { schema: keyof Database },
+    | keyof Database["public"]["Tables"]
+    | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-  ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-  : never = never
+    ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
+    : never = never
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-    Update: infer U
-  }
-  ? U
-  : never
+      Update: infer U
+    }
+    ? U
+    : never
   : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
   ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-    Update: infer U
-  }
-  ? U
-  : never
+      Update: infer U
+    }
+    ? U
+    : never
   : never
 
 export type Enums<
   PublicEnumNameOrOptions extends
-  | keyof Database["public"]["Enums"]
-  | { schema: keyof Database },
+    | keyof Database["public"]["Enums"]
+    | { schema: keyof Database },
   EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
-  ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"]
-  : never = never
+    ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"]
+    : never = never
 > = PublicEnumNameOrOptions extends { schema: keyof Database }
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof Database["public"]["Enums"]
@@ -1489,14 +1489,14 @@ export type Enums<
 export type DB = Database['public']['Tables'];
 export type SupaTable = keyof DB;
 
-export type SupaColumn<Table extends SupaTable> =
-  keyof DB[Table]['Row'];
+export type SupaColumn<Table extends SupaTable> = 
+	keyof DB[Table]['Row'];
 
-export type SupaValue<Table extends SupaTable, Column extends SupaColumn<Table>> =
-  DB[Table]['Row'][Column];
+export type SupaValue<Table extends SupaTable, Column extends SupaColumn<Table>> = 
+	DB[Table]['Row'][Column];
 
 export type SupaRow<Table extends SupaTable> =
-  { [Column in SupaColumn<Table>]: SupaValue<Table, Column>; };
+	{ [Column in SupaColumn<Table>]: SupaValue<Table, Column>; };
 
 
 
@@ -1506,14 +1506,14 @@ export type Includes = Array<SupaTable | Array<SupaTable | Includes>>;
 // the interface is WIP
 // TODO: the class must be extremely type safe
 type Methods = {
-  // select: (table: SupaTable, version: string, filter: Filter)
-  get: (object: object, table: SupaTable, ...keys: Array<object>) => any
-
-  insert: (table: SupaTable, changes: object) => Promise<PostgrestSingleResponse<any[] | any | null>>
-  query: (table: SupaTable, ...columns: Array<SupaColumn<SupaTable>>) => string
-  includedEl: (table: SupaTable, includes: Includes) => boolean
-  subquery: (table: SupaTable, includes: Includes, altName?: string) => string
-  subqueries: (tables: Array<SupaTable>, includes: Includes) => string
+	// select: (table: SupaTable, version: string, filter: Filter<T>)
+	get: (object: object, table: SupaTable, ...keys: Array<object>) => any
+	
+	insert: (table: SupaTable, changes: object) => Promise<PostgrestSingleResponse<any[] | any | null>>
+	query: (table: SupaTable, ...columns: Array<SupaColumn<SupaTable>>) => string
+	includedEl: (table: SupaTable, includes: Includes) => boolean
+	subquery: (table: SupaTable, includes: Includes, altName?: string) => string
+	subqueries: (tables: Array<SupaTable>, includes: Includes) => string
 }
 type Subqueries = {
   [table in SupaTable]: (includes: Includes) => string
@@ -1525,71 +1525,65 @@ export type ExactSupa = Exact<SupaI, Supa>
 
 
 export class Supa implements ExactSupa {
-  get<T>(object: T, table: SupaTable, ...keys: Array<keyof T>) {
-    let result: any = object; // TO-DO: no-explicit-any
-    keys.forEach((key) => {
-      result = result[`${table}_${String(key)} `];
-    });
-    return result;
-  }
+	static get<T>(object: T, table: SupaTable, ...keys: Array<keyof T>) {
+		let result: any = object; // TO-DO: no-explicit-any
+		keys.forEach((key) => {
+			result = result[`${ table }_${ String(key) } `];
+		});
+		return result;
+	}
+	
+	
+	static async insert<Table extends SupaTable>(
+		table: Table,
+		changes: { 
+			[C in SupaColumn<Table>]: SupaValue<Table, C>
+		}
+	) {
+		const payload = changes  
+		const { data, error } = await supa.from(table).insert(payload);
+		// console.log(`insert in ${ String(table) } `, data, error);
+		return { data, error };
+	}
+	static query<Table extends SupaTable>(table: Table, ...columns: Array<SupaColumn<Table>>) {
+		let result = columns.join(', ');
+		if (!String(table).match('_join_')) {
+			result += `id;` 
+		}
+		return result;
+	}
+	static includedEl(table: SupaTable, includes: Includes) {
+		return includes.find(
+			(element) =>
+				(Array.isArray(element) && element.includes(table)) ||
+				(typeof element === 'string' && element === table)
+		);
+	}
+	static subquery(table: SupaTable, includes: Includes, altName?: string): string {
+		const included = this.includedEl(table, includes);
+		if (included) {
+			const array = Array.isArray(included) ? included.slice(1) : [];
+			const result = `, ${ altName ? altName : table } (${ this[table](array) })`;
+			// console.log('Supa.subquery', table, includes, included, array, result);
+			return result;
+		} else {
+			return ``;
+		}
+	}
+	static subqueries(tables: Array<SupaTable>, includes: Includes): string {
+		const result = tables.map((t) => this.subquery(t, includes)).join('\n');
+		return result;
+	}
+	
+	
+		// DO NOT DELETE ANYTHING, EVEN THE COMMENTS, OUTSIDE YOUR ZONE
+		// YOUR ZONE STARTS HERE: please refer to the docs
+	
 
 
-  async insert<Table extends SupaTable>(
-    table: Table,
-    changes: {
-      [C in SupaColumn<Table>]: SupaValue<Table, C>
-    }
-  ) {
-    const payload = changes
-    const { data, error } = await supa.from(table).insert(payload);
-    // console.log(`insert in ${ String(table) } `, data, error);
-    return { data, error };
-  }
-  query<Table extends SupaTable>(table: Table, ...columns: Array<SupaColumn<Table>>) {
-    let result = columns.join(', ');
-    if (!String(table).match('_join_')) {
-      result += `id;`
-    }
-    return result;
-  }
-  includedEl(table: SupaTable, includes: Includes) {
-    return includes.find(
-      (element) =>
-        (Array.isArray(element) && element.includes(table)) ||
-        (typeof element === 'string' && element === table)
-    );
-  }
-  subquery(table: SupaTable, includes: Includes, altName?: string): string {
-    const included = this.includedEl(table, includes);
-    if (included) {
-      const array = Array.isArray(included) ? included.slice(1) : [];
-      const result = `, ${altName ? altName : table} (${this[table](array)})`;
-      // console.log('Supa.subquery', table, includes, included, array, result);
-      return result;
-    } else {
-      return ``;
-    }
-  }
-  subqueries(tables: Array<SupaTable>, includes: Includes): string {
-    const result = tables.map((t) => this.subquery(t, includes)).join('\n');
-    return result;
-  }
-
-
-  // DO NOT DELETE ANYTHING, EVEN THE COMMENTS, OUTSIDE YOUR ZONE
-
-
-
-  // YOUR ZONE STARTS HERE: please refer to the docs
-
-
-
-  lex() { }
-
-
-
-  // YOUR ZONE STOPS HERE
-
+	
+		// YOUR ZONE STOPS HERE
+	
 
 }
 type Filter<T extends SupaTable> = {
@@ -1597,7 +1591,7 @@ type Filter<T extends SupaTable> = {
     [operator in keyof PostgrestFilterBuilder<Database["public"], SupaRow<T>, any>]?: SupaValue<T, column>
   }
 }
-export async function select<T extends SupaTable>(table: T, filter: Filter<T>) {
+export async function select<T extends SupaTable>(table: T, filter: Filter) {
   let query = supa.from(table).select('*')
 
   Object.entries(filter).forEach(([column, filters]) => {
