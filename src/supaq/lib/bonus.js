@@ -1,7 +1,7 @@
 /**
  * @typedef {Object} HolesBonus - The template got holes and this object fills them.
- * @property {string} queries - Previous user queries.
- */
+ * @property {string | null} queries - Previous user queries.
+*/
 
 import { pre } from "./util.js";
 import { zoneDelimiters } from "./zoneDelimiters.js";
@@ -145,7 +145,7 @@ export class Supa ${!context?.unexact ? `implements ExactSupa` : ``} {
 		const result = tables.map((t) => this.subquery(t, includes)).join('\\n');
 		return result;
 	}
-	${holes.queries}
+	${holes.queries || queriesStarter()}
 }
 type Filter<T extends SupaTable> = {
   [column in ${pre('SupaColumn')}<T>]?: {
@@ -165,10 +165,17 @@ export async function select<T extends SupaTable>(table: T, filter: Filter) {
 
 export default Supa;
 `
-
-export const queriesStarter = `
+/**
+ * 
+ * @param {string} queries 
+ * @returns 
+ */
+export const queriesStarter = (queries) => {
+	
+return `
 	${zoneDelimiters.start}
 
 
 	${zoneDelimiters.stop}
 `
+}

@@ -7,7 +7,7 @@
 // ...
 
 import type { PostgrestSingleResponse } from "@supabase/supabase-js"
-import type { SupaColumn, SupaTable, SupaValue } from "./supagentypes.ts"
+import type { SupaColumn, SupaTable, SupaValue } from "./gen/supaq.ts"
 import sup from "./supabase.ts"
 // import { invalidateAll } from '$app/navigation'
 

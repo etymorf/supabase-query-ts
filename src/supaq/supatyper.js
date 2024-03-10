@@ -5,10 +5,10 @@ const exec = util.promisify(exec_base)
 import fs from 'fs'
 import program from 'commander'
 
-import { zoneDelimiters, zoneDelimitersReg } from './lib/zoneDelimiters.js'
 import bonus, { queriesStarter } from './lib/bonus.js'
 import imports, { dots } from './lib/imports.js'
 import { getUserQueries, justTables } from './lib/tinkering.js'
+import { genBaseQueries, parseSchema } from './lib/jsc.js'
 
 program
 	.option('-c, --client-path <file>', 'relative path (from the output file location) to Supabase client file in which the client is exported as default.')
@@ -72,16 +72,46 @@ async function gen() {
 	// if (errSupa !== "") console.log(`Command Error Output (stderr) :\n${errSupa}`)
 	fs.writeFileSync(path.typeTables, justTables(outSupa), encoder)
 	const { stdout: outSchema, stderr: errSchema } = await exec(`${command} ts-generate-schema ${path.typeTables} --out .`)
-	const typeTables = fs.readFileSync(path.typeTables, encoder)
-	let queries = ``
+	/**
+	 * @type {string | null}
+	 */
+	let queries = null
 	try {
 		queries = getUserQueries(fs.readFileSync(path.output, encoder))
 	} catch (error) {
-		queries = queriesStarter
 	}
-	if (!queries.length) queries = queriesStarter
+	if (!queries || !queries.match(new RegExp(".*\w.*", "g"))) {
+		queries = queriesStarter(genBaseQueries(parseSchema(JSON.parse(fs.readFileSync(path.schemaTables, encoder)))))
+	}
 	const concat = imports({ clientPath }) + outSupa + bonus({ queries })
 	fs.writeFileSync(path.output, concat);
 }
 
 gen()
+
+/* 
+
+type Query<Table extends SupaTable> = {
+	columns: Array<SupaColumn<Table>>
+	relations?: Array<SupaTable> // but relations are already defined by schema so users should only focus on proving includes:Includes and the columns
+	includes: Includes
+}
+
+type Crazy = {
+	[T in SupaTable]?: {
+		[Version: string]: Query<T>
+	}
+}
+
+// HERE IS WHAT USERS WILL WRITE IN THEIR CONFIG
+// IT IS TYPED AND CONCISE
+// THE PROGRAM GOT ALL INFO NEEDED TO GENERATE THE QUERY + THE RESULT TYPE
+export const queries: Crazy = {
+	language: {
+		big: {
+			columns: ["native_name"],
+			includes: [["partner", "partner_join_feature", "feature"]]
+		}
+	}
+}
+*/

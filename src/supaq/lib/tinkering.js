@@ -22,14 +22,20 @@ export function justTables(outSupa) {
 /**
  * 
  * @param {string} currentQueries 
+ * @returns {string | null}
  */
 export function getUserQueries(currentQueries) {
-	let isOn = false, queries = ``
+	let isOn = false
+	/**
+	 * @type {string | null}
+	 */
+	let queries = null
 	currentQueries.split('\n').forEach((line, index) => {
 		if (line.match(zoneDelimitersReg.start)) {
 			isOn = true
 		}
 		if (isOn) {
+			if (!queries) queries = ``
 			queries += `
 				${line}
 			`
@@ -40,3 +46,39 @@ export function getUserQueries(currentQueries) {
 	})
 	return queries
 }
+/**
+ * @typedef {"Row" | "Insert" | "Update"} Action
+ */
+/**
+ * @typedef {"null" | "number" | "string"} Type
+ */
+/**
+ * @typedef {{
+	* [column: string]: {
+	* 	type: Type | Type[]
+	* }
+ * }} Columns
+ */
+/**
+ * @typedef {Object} TableSchema
+ * @property {"object"} type
+ * @property {Object.<Action, Columns>} properties
+ * @property {Required} required
+ */
+/**
+ * @typedef {Object} TablesSchema
+ * @property {"object"} type
+ * @property {Object.<string, TableSchema<>>} properties
+ * @property {Required} required
+ * @property {string} $schema
+ */
+/**
+ * @typedef {Array<string>} Required
+ */
+/**
+ * 
+ * @param {TablesSchema} schema 
+ */
+// export function parseSchema(schema) {
+
+// }
