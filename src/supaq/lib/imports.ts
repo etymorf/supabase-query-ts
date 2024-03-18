@@ -1,5 +1,11 @@
-export const dots = `..`;
-export default (holes) => `
+
+export const dots = `..`
+
+type ImportsHoles = {
+	clientPath: string
+}
+
+export default (holes: ImportsHoles) => `
 
 import type { Exact } from 'type-fest';
 
@@ -22,4 +28,4 @@ replaced by config.supabase:
 	dbUrl?: string
 }
 */
-`;
+`

@@ -1,14 +1,27 @@
-import type { Exact } from 'type-fest';
 
-import { PostgrestFilterBuilder, PostgrestSingleResponse } from '@supabase/postgrest-js'
+
+// import type { Exact } from 'type-fest';
+
+import { PostgrestFilterBuilder, PostgrestSingleResponse } from "@supabase/postgrest-js"
 // import { SupabaseClient } from '@supabase/supabase-js';
 
 // from SupaQ
-import arr2obj from '../helpers/arr2obj.ts';
-import type { Parsed } from '../suparse.ts';
+// import arr2obj from '../helpers/arr2obj';
+// import type { Parsed } from '../suparse';
 
 // set by user
-import supa from '../supabase.ts';
+import supa from '../supabase';
+/* 
+replaced by config.supabase: 
+{
+  key: string
+  projectId?: string
+  local?: boolean
+  linked?: boolean
+  dbUrl?: string
+}
+*/
+
 
 export type Json =
   | string
@@ -1519,10 +1532,10 @@ type Subqueries = {
 type SupaI = Methods & Subqueries
 
 
-export type ExactSupa = Exact<SupaI, Supa>
+// export type ExactSupa = Exact<SupaI, Supa>
 
 
-export class Supa implements ExactSupa {
+export class Supa {
   static get<T>(object: T, table: SupaTable, ...keys: Array<keyof T>) {
     let result: any = object; // TO-DO: no-explicit-any
     keys.forEach((key) => {
@@ -1589,7 +1602,7 @@ type Filter<T extends SupaTable> = {
     [operator in keyof PostgrestFilterBuilder<Database["public"], SupaRow<T>, any>]?: SupaValue<T, column>
   }
 }
-export async function select<T extends SupaTable>(table: T, filter: Filter) {
+export async function select<T extends SupaTable>(table: T, filter: Filter<T>) {
   let query = supa.from(table).select('*')
 
   Object.entries(filter).forEach(([column, filters]) => {
@@ -1598,6 +1611,31 @@ export async function select<T extends SupaTable>(table: T, filter: Filter) {
     })
   })
   await query
+}
+
+type Query<Table extends SupaTable> = {
+  columns: Array<SupaColumn<Table>>
+  relations?: Array<SupaTable> // but relations are already defined by schema so users should only focus on providing includes:Includes and the columns
+  includes: Includes
+}
+
+export type Config = {
+  queries: {
+    [T in SupaTable]?: {
+      [Version: string]: Query<T>
+    }
+  }
+  supabase: {
+    key: string
+    projectId?: string
+    local?: boolean
+    linked?: boolean
+    dbUrl?: string
+  }
+  options?: {
+    withPrefix?: boolean
+    executable?: 'npx' | 'pnpx' | null | ''
+  }
 }
 
 export default Supa;

@@ -31,10 +31,15 @@ type JSCSchema<T extends JSCType = JSCType, P extends string | number | symbol =
 type Action = "Row" | "Insert" | "Update"
 
 type Parsed = {
-	[table: string]: { columns: Array<{ [column: string]: JSCPrimitive }> } & { relationships: string[] } & { related: string[] }
+	[table: string]: ParsedTable
 }
+type ParsedTable = { columns: Array<{ [column: string]: JSCPrimitive }> } & { relationships: string[] } & { related: string[] }
 
-
+const emptyParsedTable: ParsedTable = {
+	columns: [],
+	relationships: [],
+	related: []
+}
 export function parseSchema(tables: JSCSchema) {
 	const parsed: Parsed = {}
 	if (tables.type === "object") {
@@ -49,7 +54,9 @@ export function parseSchema(tables: JSCSchema) {
 							if (item.properties["referencedRelation"].type === "string") {
 								item.properties["referencedRelation"].enum?.forEach(relationship => {
 									if (typeof relationship === "string") {
-										parsed[table].relationships.push(relationship)
+										if (!(table in parsed)) {
+											parsed[relationship] = emptyParsedTable
+										}
 										parsed[relationship].related.push(table)
 									}
 								})
@@ -75,7 +82,12 @@ export function parseSchema(tables: JSCSchema) {
 							type = shape.type
 						}
 						if (type) {
+							if (!(table in parsed)) {
+								parsed[table] = emptyParsedTable
+							}
 							parsed[table].columns.push({ [column]: type })
+
+
 						}
 					})
 				}

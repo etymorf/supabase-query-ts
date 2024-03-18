@@ -1,31 +1,32 @@
-"use strict";
 // import tables from "../gen/tables.jsc"
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.genBaseQueries = exports.parseSchema = void 0;
-var jscPrimitive = ["boolean", "number", "string", "null"];
-var isJSCPrimitive = function (v) { return (jscPrimitive.includes(v)); };
-var jscObject = "object";
-var isJSCObject = function (v) { return (jscObject === v); };
-var jscArray = "array";
-var isJSCArray = function (v) { return (jscArray === v); };
-function parseSchema(tables) {
-    var parsed = {};
+const jscPrimitive = ["boolean", "number", "string", "null"];
+const isJSCPrimitive = (v) => (jscPrimitive.includes(v));
+const jscObject = "object";
+const isJSCObject = (v) => (jscObject === v);
+const jscArray = "array";
+const isJSCArray = (v) => (jscArray === v);
+const emptyParsedTable = {
+    columns: [],
+    relationships: [],
+    related: []
+};
+export function parseSchema(tables) {
+    const parsed = {};
     if (tables.type === "object") {
-        Object.entries(tables.properties).forEach(function (_a) {
-            var _b;
-            var table = _a[0], action = _a[1];
+        Object.entries(tables.properties).forEach(([table, action]) => {
             if (action.type === "object") {
                 if (action.properties["Relationships"].type === "array") {
-                    (_b = action.properties["Relationships"].items) === null || _b === void 0 ? void 0 : _b.forEach(function (item) {
-                        var _a;
+                    action.properties["Relationships"].items?.forEach(item => {
                         if (item.type === "object") {
                             // if (item.properties["foreignKeyName"].type === "string") { }
                             // if (item.properties["columns"].type === "array") { }
                             // if (item.properties["isOneToOne"].type === "boolean") { }
                             if (item.properties["referencedRelation"].type === "string") {
-                                (_a = item.properties["referencedRelation"].enum) === null || _a === void 0 ? void 0 : _a.forEach(function (relationship) {
+                                item.properties["referencedRelation"].enum?.forEach(relationship => {
                                     if (typeof relationship === "string") {
-                                        parsed[table].relationships.push(relationship);
+                                        if (!(table in parsed)) {
+                                            parsed[relationship] = emptyParsedTable;
+                                        }
                                         parsed[relationship].related.push(table);
                                     }
                                 });
@@ -35,10 +36,8 @@ function parseSchema(tables) {
                     });
                 }
                 if (action.properties["Row"].type === "object") {
-                    Object.entries(action.properties["Row"].properties).forEach(function (_a) {
-                        var _b;
-                        var column = _a[0], shape = _a[1];
-                        var type;
+                    Object.entries(action.properties["Row"].properties).forEach(([column, shape]) => {
+                        let type;
                         if (Array.isArray(shape.type)) {
                             if (shape.type.length === 2) {
                                 if (isJSCPrimitive(shape.type[1])) {
@@ -50,7 +49,10 @@ function parseSchema(tables) {
                             type = shape.type;
                         }
                         if (type) {
-                            parsed[table].columns.push((_b = {}, _b[column] = type, _b));
+                            if (!(table in parsed)) {
+                                parsed[table] = emptyParsedTable;
+                            }
+                            parsed[table].columns.push({ [column]: type });
                         }
                     });
                 }
@@ -59,20 +61,29 @@ function parseSchema(tables) {
     }
     return parsed;
 }
-exports.parseSchema = parseSchema;
-function genBaseQueries(parsed) {
-    var text = "";
-    Object.entries(parsed).forEach(function (_a) {
-        var table = _a[0], shape = _a[1];
-        var columns = [];
-        Object.entries(shape.columns).forEach(function (_a) {
-            var column = _a[0], type = _a[1];
+export function genBaseQueries(parsed) {
+    let text = ``;
+    Object.entries(parsed).forEach(([table, shape]) => {
+        const columns = [];
+        Object.entries(shape.columns).forEach(([column, type]) => {
             if (column !== "id") {
                 columns.push(column);
             }
         });
-        text += "\n\t\t\t".concat(table, "(includes: Includes): string {\n\t\t\t\treturn `\n\t\t\t\t\t${this.query(\n\t\t\t\t\t\t\"").concat(table, "\",\n\t\t\t\t\t\t").concat(columns.map(function (col) { return ("'".concat(col, "'")); }).join(","), "\n\t\t\t\t\t)}\n\t\t\t\t\t${this.subqueries(\n\t\t\t\t\t\t[").concat(shape.relationships.map(function (rel) { return ("\"".concat(rel, "\"")); }).join(", "), "],\n\t\t\t\t\t\tincludes\n\t\t\t\t\t)}\n\t\t\t\t`\n\t\t\t}\n\t\t");
+        text += `
+			${table}(includes: Includes): string {
+				return \`
+					\${this.query(
+						"${table}",
+						${columns.map(col => (`'${col}'`)).join(",")}
+					)}
+					\${this.subqueries(
+						[${shape.relationships.map(rel => (`"${rel}"`)).join(", ")}],
+						includes
+					)}
+				\`
+			}
+		`;
     });
     return text;
 }
-exports.genBaseQueries = genBaseQueries;

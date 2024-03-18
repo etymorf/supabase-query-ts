@@ -23,7 +23,6 @@ program
 	.parse(process.argv);
 
 const command = program.exec || `pnpx` // TODO: rename it
-
 let commandSupa = `${command} supabase gen types typescript `
 
 const dir = `gen`
@@ -81,7 +80,7 @@ async function gen() {
 	} catch (error) {
 	}
 	if (!queries || !queries.match(new RegExp(".*\w.*", "g"))) {
-		queries = queriesStarter(genBaseQueries(parseSchema(JSON.parse(fs.readFileSync(path.schemaTables, encoder)))))
+		queries = queriesStarter(genBaseQueries(parseSchema(JSON.parse(fs.readFileSync(path.schemaTables, encoder).replace("export default ", "")))))
 	}
 	const concat = imports({ clientPath }) + outSupa + bonus({ queries })
 	fs.writeFileSync(path.output, concat);
@@ -103,6 +102,7 @@ type Crazy = {
 	}
 }
 
+// WIP
 // HERE IS WHAT USERS WILL WRITE IN THEIR CONFIG
 // IT IS TYPED AND CONCISE
 // THE PROGRAM GOT ALL INFO NEEDED TO GENERATE THE QUERY + THE RESULT TYPE

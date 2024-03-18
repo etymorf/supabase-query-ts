@@ -1,6 +1,19 @@
+/**
+ * The template got holes and this object fills them.
+*/
+type HolesBonus = {
+	queries: string | null
+}
+
 import { pre } from "./util.js";
 import { zoneDelimiters } from "./zoneDelimiters.js";
-export default (holes, context) => `
+
+type ContextBonus = {
+	withPrefix: boolean
+	unexact: boolean
+}
+
+export default (holes: HolesBonus, context: ContextBonus) => `
 
 // SupaQ helper types
 
@@ -92,7 +105,7 @@ export class Supa ${!context?.unexact ? `implements ExactSupa` : ``} {
 					}
 				})
 			);
-		` : `changes`}  
+		`: `changes`}  
 		const { data, error } = await supa.from(table).insert(payload);
 		// console.log(\`insert in \${ String(table) } \`, data, error);
 		return { data, error };
@@ -170,17 +183,18 @@ export type Config = {
 }
 
 export default Supa;
-`;
+`
 /**
- *
- * @param {string} queries
- * @returns
+ * 
+ * @param {string} queries 
+ * @returns 
  */
 export const queriesStarter = (queries) => {
-    return `
+	
+return `
 	${zoneDelimiters.start}
 
 
 	${zoneDelimiters.stop}
-`;
-};
+`
+}

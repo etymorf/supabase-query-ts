@@ -1,13 +1,13 @@
 export const zoneDelimitersReg = {
-    start: `OUTSIDE YOUR ZONE`,
-    stop: `YOUR ZONE STOPS HERE`
-};
+	start: `OUTSIDE YOUR ZONE`,
+	stop: `YOUR ZONE STOPS HERE`
+} as const
 export const zoneDelimiters = {
-    start: `
+	start: `
 		// DO NOT DELETE ANYTHING, EVEN THE COMMENTS, ${zoneDelimitersReg.start}
 		// YOUR ZONE STARTS HERE: please refer to the docs
 	`,
-    stop: `
+	stop: `
 		// ${zoneDelimitersReg.stop}
 	`
-};
+} as const
