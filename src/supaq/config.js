@@ -1,4 +1,4 @@
-import environment from "../environment.js"; // 
+import environment from "../environment.js"; // as weird as it seems, importing from a .js is what's best
 const config = {
     queries: {
         def: {

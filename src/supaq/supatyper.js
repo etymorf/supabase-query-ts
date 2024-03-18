@@ -3,7 +3,7 @@ import util from 'util'
 import { exec as exec_base } from 'child_process'
 const exec = util.promisify(exec_base)
 import fs from 'fs'
-import program from 'commander'
+import {program} from 'commander'
 
 import bonus, { queriesStarter } from './lib/bonus.js'
 import imports, { dots } from './lib/imports.js'

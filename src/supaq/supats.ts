@@ -1,64 +1,52 @@
+// to drop for production
+import type { Config } from "./gen/supaq"
+
 import * as util from 'util'
 import { exec as exec_base } from 'child_process'
 const exec = util.promisify(exec_base)
-// import fs from 'fs'
-// import program from 'commander'
+import * as fs from 'fs'
+// import { program } from 'commander'
 
+import { getPath } from "./lib/path.js"
 // import bonus, { queriesStarter } from './lib/bonus.js'
 // import imports, { dots } from './lib/imports.js'
 // import { getUserQueries, justTables } from './lib/tinkering.js'
 // import { genBaseQueries, parseSchema } from './lib/jsc.js'
 
-let fullPath = `./config.ts`
-const regTs = /(.*)\.ts$/
-const regJs = /(.*)\.js$/
-const matchTs = fullPath.match(regTs)
-const matchJs = fullPath.match(regJs)
+// program.option("-c, --config <file>", "relative path to SupaQ config file: -c ./supaconfig.ts or ./config ...")
+console.log(process.argv[2])
+const fullPath = process.argv[2] || `./config.ts`
 
-async function getPath() {
-	/**
-	 * @type {null |string}
-	 */
-	let path = null
-	if (matchJs) {
-		path = matchJs[1]
-	} else {
-		if (matchTs) {
-			path = matchTs[1]
-		} else {
-			path = fullPath
-		}
-		const command = `tsc ${path}.ts --target es2022 --moduleResolution node --strict false --skipLibCheck`
-
+async function importConfig(fullPath: string) {
+	let config: Config
+	let { path, command } = await getPath(fullPath)
+	if (command) {
 		try {
 			// console.log(`command ${command} will be executed`)
 			const { stdout, stderr } = await exec(command)
 			// console.log(`command ${command} has been executed, stdout: ${stdout}, stderr: ${stderr}`)
-
-		} catch (error) {
-			console.error(error)
-		}
-
-		// I choose not to handle errors as it will be errors anyway because of type-fest which can't be imported 
-
+		} catch (error) { console.error(error) }
 	}
-	return path
-}
-async function main() {
-	let path = await getPath()
 	path = `${path}.js`
 	try {
 		console.log(`will import ${path}`)
-		const { default: config } = await import(path)
-		console.log(config)
+		const imported = await import(path)
+		config = imported.default as Config
+		// console.log(config)
+		return config
 	} catch (error) {
 		console.error(error)
 	}
 }
 
-async function test() {
+async function main() {
+	const config = await importConfig(fullPath)
+	if (config) {
 
+	}
 }
+
+async function test() {}
 
 main()
 // test()

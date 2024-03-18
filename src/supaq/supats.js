@@ -1,34 +1,19 @@
+let fullPath = `./config.ts`;
 import * as util from 'util';
 import { exec as exec_base } from 'child_process';
 const exec = util.promisify(exec_base);
-// import fs from 'fs'
-// import program from 'commander'
+import { program } from 'commander';
+import { getPath } from "./lib/path.js";
 // import bonus, { queriesStarter } from './lib/bonus.js'
 // import imports, { dots } from './lib/imports.js'
 // import { getUserQueries, justTables } from './lib/tinkering.js'
 // import { genBaseQueries, parseSchema } from './lib/jsc.js'
-// To make it much much simpler, the path MUST BE an absolute path relative to the root of the directory
-let fullPath = `./config.ts`;
-const regTs = /(.*)\.ts$/;
-const regJs = /(.*)\.js$/;
-const matchTs = fullPath.match(regTs);
-const matchJs = fullPath.match(regJs);
-async function getPath() {
-    /**
-     * @type {null |string}
-     */
-    let path = null;
-    if (matchJs) {
-        path = matchJs[1];
-    }
-    else {
-        if (matchTs) {
-            path = matchTs[1];
-        }
-        else {
-            path = fullPath;
-        }
-        const command = `tsc ${path}.ts --target es2022 --moduleResolution node --strict false --skipLibCheck`;
+program.option("-c, --config <file>", "relative path to SupaQ config file: -c ./supaconfig.ts or ./config ...");
+console.log(process.argv[2]);
+async function importConfig(fullPath) {
+    let config;
+    let { path, command } = await getPath(fullPath);
+    if (command) {
         try {
             // console.log(`command ${command} will be executed`)
             const { stdout, stderr } = await exec(command);
@@ -36,28 +21,26 @@ async function getPath() {
         }
         catch (error) {
             console.error(error);
-            // everything went good, no worries, some compiler options just need an adjustment
         }
-        // I choose not to handle errors as it will be errors anyway because of type-fest which can't be imported 
     }
-    return path;
-}
-async function main() {
-    let path = await getPath();
     path = `${path}.js`;
-    // console.log(`will import ${path}`)
     try {
         console.log(`will import ${path}`);
-        const { default: config } = await import(path);
-        console.log(config);
+        const imported = await import(path);
+        config = imported.default;
+        // console.log(config)
+        return config;
     }
     catch (error) {
         console.error(error);
     }
 }
+async function main() {
+    const config = await importConfig(fullPath);
+    if (config) {
+    }
+}
 async function test() {
-    const { stdout, stderr } = await exec('dir');
-    console.log(stdout, stderr);
 }
 main();
 // test()
