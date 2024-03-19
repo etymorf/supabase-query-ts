@@ -10,7 +10,7 @@ import { getPath } from "./lib/path.js";
 // import { genBaseQueries, parseSchema } from './lib/jsc.js'
 program.option("-c, --config <file>", "relative path to SupaQ config file: -c ./supaconfig.ts or ./config ...");
 console.log(process.argv[2]);
-async function importConfig(fullPath) {
+async function getConfig(fullPath) {
     let config;
     let { path, command } = await getPath(fullPath);
     if (command) {
@@ -36,7 +36,7 @@ async function importConfig(fullPath) {
     }
 }
 async function main() {
-    const config = await importConfig(fullPath);
+    const config = await getConfig(fullPath);
     if (config) {
     }
 }

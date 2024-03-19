@@ -5,6 +5,14 @@
 // import type { Parsed } from '../suparse';
 // set by user
 import supa from '../supabase';
+const test = [
+    {
+        def: "big"
+    },
+    {
+        lex_def: "mini"
+    }
+];
 // export type ExactSupa = Exact<SupaI, Supa>
 export class Supa {
     static get(object, table, ...keys) {

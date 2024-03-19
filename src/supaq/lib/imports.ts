@@ -1,31 +1,16 @@
 
 export const dots = `..`
 
-type ImportsHoles = {
-	clientPath: string
-}
-
-export default (holes: ImportsHoles) => `
+export default () => `
 
 import type { Exact } from 'type-fest';
 
 import { PostgrestFilterBuilder, PostgrestSingleResponse } from '@supabase/postgrest-js'
-// import { SupabaseClient } from '@supabase/supabase-js';
+import { SupabaseClient, createClient } from '@supabase/supabase-js';
 
 // from SupaQ
-import arr2obj from '${dots}/helpers/arr2obj';
+import arr2obj from '${dots}/helpers/arr2obj.js';
 import type { Parsed } from '${dots}/suparse';
+import type { ConfigCommons } from '${dots}/util'
 
-// set by user
-import supa from '${holes.clientPath}';
-/* 
-replaced by config.supabase: 
-{
-	key: string
-	projectId?: string
-	local?: boolean
-	linked?: boolean
-	dbUrl?: string
-}
-*/
 `

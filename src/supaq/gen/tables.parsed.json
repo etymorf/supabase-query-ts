@@ -1,0 +1,4995 @@
+{
+	"def": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [],
+		"rel_from": [
+			"lex_def",
+			"theme_def",
+			"word_def"
+		]
+	},
+	"user": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [],
+		"rel_from": [
+			"history"
+		]
+	},
+	"history": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [
+			"user",
+			"word"
+		],
+		"rel_from": []
+	},
+	"word": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [
+			"lang",
+			"type_word"
+		],
+		"rel_from": [
+			"history",
+			"word_def",
+			"word_piece"
+		]
+	},
+	"lang": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [],
+		"rel_from": [
+			"lex",
+			"word"
+		]
+	},
+	"level": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [],
+		"rel_from": [
+			"lex"
+		]
+	},
+	"lex": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [
+			"lang",
+			"level"
+		],
+		"rel_from": [
+			"lex_def",
+			"same_roots",
+			"word_piece"
+		]
+	},
+	"lex_def": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [
+			"def",
+			"def_theme_view",
+			"lex"
+		],
+		"rel_from": [
+			"word_piece"
+		]
+	},
+	"def_theme_view": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [],
+		"rel_from": [
+			"lex_def",
+			"theme_def",
+			"word_def"
+		]
+	},
+	"type_piece": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [],
+		"rel_from": [
+			"part"
+		]
+	},
+	"part": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [
+			"type_piece"
+		],
+		"rel_from": [
+			"word_piece"
+		]
+	},
+	"phrase": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [],
+		"rel_from": [
+			"phrase_piece"
+		]
+	},
+	"phrase_piece": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [
+			"phrase",
+			"word_def"
+		],
+		"rel_from": []
+	},
+	"word_def": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [
+			"def",
+			"def_theme_view",
+			"word"
+		],
+		"rel_from": [
+			"phrase_piece"
+		]
+	},
+	"same_roots": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [
+			"lex"
+		],
+		"rel_from": []
+	},
+	"theme": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [],
+		"rel_from": [
+			"theme_def"
+		]
+	},
+	"theme_def": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [
+			"def",
+			"def_theme_view",
+			"theme"
+		],
+		"rel_from": []
+	},
+	"type_word": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [],
+		"rel_from": [
+			"word"
+		]
+	},
+	"word_piece": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [
+			"part",
+			"word_piece_view",
+			"lex",
+			"lex_def",
+			"word"
+		],
+		"rel_from": []
+	},
+	"word_piece_view": {
+		"columns": [
+			{
+				"created_at": "string"
+			},
+			{
+				"deu": "string"
+			},
+			{
+				"eng": "string"
+			},
+			{
+				"epo": "string"
+			},
+			{
+				"esp": "string"
+			},
+			{
+				"etylex": "boolean"
+			},
+			{
+				"fra": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"ita": "string"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"duration": "number"
+			},
+			{
+				"level": "number"
+			},
+			{
+				"status": "boolean"
+			},
+			{
+				"time": "string"
+			},
+			{
+				"user": "string"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"description": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"de": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"level_fra": "number"
+			},
+			{
+				"parent": "number"
+			},
+			{
+				"pl": "string"
+			},
+			{
+				"ru": "string"
+			},
+			{
+				"text": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lex": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"n": "number"
+			},
+			{
+				"no": "number"
+			},
+			{
+				"part": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"order": "number"
+			},
+			{
+				"phrase": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"baby": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"origin": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"eo": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"theme": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"en": "string"
+			},
+			{
+				"fr": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"id": "string"
+			},
+			{
+				"name": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"lang": "string"
+			},
+			{
+				"type": "string"
+			},
+			{
+				"word": "string"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"def": "number"
+			},
+			{
+				"id": "number"
+			},
+			{
+				"word": "number"
+			},
+			{
+				"created_at": "string"
+			},
+			{
+				"part": "number"
+			},
+			{
+				"piece": "number"
+			},
+			{
+				"puzzle": "number"
+			},
+			{
+				"word": "number"
+			}
+		],
+		"rel_to": [],
+		"rel_from": [
+			"word_piece"
+		]
+	}
+}

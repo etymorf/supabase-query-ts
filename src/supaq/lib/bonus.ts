@@ -2,18 +2,17 @@
  * The template got holes and this object fills them.
 */
 type HolesBonus = {
+	// WIP generate queries from config 
+	// the user never touches the output
 	queries: string | null
 }
 
-import { pre } from "./util.js";
+import { ConfigCommons, pre } from "./util.js";
 import { zoneDelimiters } from "./zoneDelimiters.js";
 
-type ContextBonus = {
-	withPrefix: boolean
-	unexact: boolean
-}
 
-export default (holes: HolesBonus, context: ContextBonus) => `
+
+export default (holes: HolesBonus, config: ConfigCommons) => `
 
 // SupaQ helper types
 
@@ -52,7 +51,7 @@ export type Includes = Array<SupaTable | Array<SupaTable | Includes>>;
 type Methods = {
 	// select: (table: SupaTable, version: string, filter: Filter<T>)
 	get: (object: object, table: SupaTable, ...keys: Array<object>) => any
-	${context?.withPrefix ? `µ: () => any` : ``}
+	${config.options?.withPrefix ? `µ: () => any` : ``}
 	insert: (table: SupaTable, changes: object) => Promise<PostgrestSingleResponse<any[] | any | null>>
 	query: (table: SupaTable, ...columns: Array<SupaColumn<SupaTable>>) => string
 	includedEl: (table: SupaTable, includes: Includes) => boolean
@@ -64,11 +63,10 @@ type Subqueries = {
 }
 type SupaI = Methods & Subqueries
 
-${!context?.unexact ? `
-export type ExactSupa = Exact<SupaI, Supa>
-` : ``}
 
-export class Supa ${!context?.unexact ? `implements ExactSupa` : ``} {
+export type ExactSupa = Exact<SupaI, Supa>
+
+export class Supa implements ExactSupa {
 	static get<T>(object: T, table: SupaTable, ...keys: Array<keyof T>) {
 		let result: any = object; // TO-DO: no-explicit-any
 		keys.forEach((key) => {
@@ -76,7 +74,7 @@ export class Supa ${!context?.unexact ? `implements ExactSupa` : ``} {
 		});
 		return result;
 	}
-	${context?.withPrefix ? `
+	${config.options?.withPrefix ? `
 		µ<T extends SupaTable>(object: Parsed<T, { [key in SupaColumn<T>]?: any }> & { __table: T }, k: SupaColumnPre<T>) {
 			const table = object.__table
 			if (table) {
@@ -91,10 +89,10 @@ export class Supa ${!context?.unexact ? `implements ExactSupa` : ``} {
 	static async insert<Table extends SupaTable>(
 		table: Table,
 		changes: { 
-			[C in ${pre('SupaColumn')}<Table>]: SupaValue<Table, C>
+			[C in ${pre('SupaColumn', config.options)}<Table>]: SupaValue<Table, C>
 		}
 	) {
-		const payload = ${context?.withPrefix ? `
+		const payload = ${config.options?.withPrefix ? `
 			arr2obj(
 				Object.entries(changes).map((p) => {
 					const [key, value] = p;
@@ -111,9 +109,9 @@ export class Supa ${!context?.unexact ? `implements ExactSupa` : ``} {
 		return { data, error };
 	}
 	static query<Table extends SupaTable>(table: Table, ...columns: Array<${pre('SupaColumn')}<Table>>) {
-		let result = columns${context?.withPrefix ? `.map((column) => \`\${ String(table) }_\${ String(column) } \`)` : ``}.join(', ');
+		let result = columns${config.options?.withPrefix ? `.map((column) => \`\${ String(table) }_\${ String(column) } \`)` : ``}.join(', ');
 		if (!String(table).match('_join_')) {
-			result += ${context?.withPrefix ? `\`, \${ String(table) } _id\`;` : `\`id;\``} 
+			result += ${config.options?.withPrefix ? `\`, \${ String(table) } _id\`;` : `\`id;\``} 
 		}
 		return result;
 	}
@@ -139,7 +137,7 @@ export class Supa ${!context?.unexact ? `implements ExactSupa` : ``} {
 		const result = tables.map((t) => this.subquery(t, includes)).join('\\n');
 		return result;
 	}
-	${holes.queries || queriesStarter()}
+	${holes.queries || queriesStarter(``)}
 }
 type Filter<T extends SupaTable> = {
   [column in ${pre('SupaColumn')}<T>]?: {
@@ -169,32 +167,18 @@ export type Config = {
 			[Version: string]: Query<T>
 		}
 	}
-	supabase: {
-		key: string
-		projectId?: string
-		local?: boolean
-		linked?: boolean
-		dbUrl?: string
-	}
-	options?: {
-		withPrefix?: boolean
-		executable?: 'npx' | 'pnpx' | null | ''
-	}
-}
+} & ConfigCommons
+
+const supabaseClient: SupabaseClient = createClient<Database>(${config.supabase.dbUrl || `https://${config.supabase.projectId}.supabase.co`}, environment.SUPABASE_ANON_KEY);
 
 export default Supa;
 `
-/**
- * 
- * @param {string} queries 
- * @returns 
- */
-export const queriesStarter = (queries) => {
-	
-return `
+
+export const queriesStarter = (queries: string) => {
+
+	return `
 	${zoneDelimiters.start}
-
-
+	${queries}
 	${zoneDelimiters.stop}
 `
 }

@@ -11,16 +11,7 @@ import { PostgrestFilterBuilder, PostgrestSingleResponse } from "@supabase/postg
 
 // set by user
 import supa from '../supabase';
-/* 
-replaced by config.supabase: 
-{
-  key: string
-  projectId?: string
-  local?: boolean
-  linked?: boolean
-  dbUrl?: string
-}
-*/
+
 
 
 export type Json =
@@ -1509,10 +1500,21 @@ export type SupaValue<Table extends SupaTable, Column extends SupaColumn<Table>>
 export type SupaRow<Table extends SupaTable> =
   { [Column in SupaColumn<Table>]: SupaValue<Table, Column>; };
 
+type Includeed<Tables extends SupaTable> = { [T in Tables]: string }
+type Included<Tables extends SupaTable> = { [table in Tables]: string }
+export type Includes<Table extends SupaTable = SupaTable> = Array<SupaTable | Array<SupaTable | Includes>>;
+const test = [
+  {
+    def: "big"
+  },
+  {
+    lex_def: "mini"
+  }
+]
 
-
-
-export type Includes = Array<SupaTable | Array<SupaTable | Includes>>;
+/* 
+[ lex-all ] > [ lex_def-huge ] [ def-big > type-mini ]
+*/
 
 // the interface is WIP
 // TODO: the class must be extremely type safe
@@ -1615,11 +1617,11 @@ export async function select<T extends SupaTable>(table: T, filter: Filter<T>) {
 
 type Query<Table extends SupaTable> = {
   columns: Array<SupaColumn<Table>>
-  relations?: Array<SupaTable> // but relations are already defined by schema so users should only focus on providing includes:Includes and the columns
-  includes: Includes
+  relations?: Array<SupaTable> // but relations are already defined by schema so users should only focus on providing includes + columns
+  includes: Includes<Table>
 }
 
-export type Config = {
+export type Config<> = {
   queries: {
     [T in SupaTable]?: {
       [Version: string]: Query<T>

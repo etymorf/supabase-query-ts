@@ -78,7 +78,7 @@ export class Supa ${!context?.unexact ? `implements ExactSupa` : ``} {
 	static async insert<Table extends SupaTable>(
 		table: Table,
 		changes: { 
-			[C in ${pre('SupaColumn')}<Table>]: SupaValue<Table, C>
+			[C in ${pre('SupaColumn', context)}<Table>]: SupaValue<Table, C>
 		}
 	) {
 		const payload = ${context?.withPrefix ? `
