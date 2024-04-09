@@ -1,35 +1,25 @@
-/**
- * The template got holes and this object fills them.
-*/
-type HolesBonus = {
-	// WIP generate queries from config 
-	// the user never touches the output
-	queries: string | null
-}
-
 import { ConfigCommons, pre } from "./util.js";
-import { zoneDelimiters } from "./zoneDelimiters.js";
 
-
-
-export default (holes: HolesBonus, config: ConfigCommons) => `
+const builder = (config: ConfigCommons) => {
+	return {
+		types: `
 
 // SupaQ helper types
 
 export type DB = Database['public']['Tables'];
 export type SupaTable = keyof DB;
 
-export type SupaColumn<Table extends SupaTable> = 
+export type SupaColumn<Table extends SupaTable> =
 	keyof DB[Table]['Row'];
 
-export type SupaValue<Table extends SupaTable, Column extends SupaColumn<Table>> = 
+export type SupaValue<Table extends SupaTable, Column extends SupaColumn<Table>> =
 	DB[Table]['Row'][Column];
 
 export type SupaRow<Table extends SupaTable> =
 	{ [Column in SupaColumn<Table>]: SupaValue<Table, Column>; };
 
 
-${context?.withPrefix ? `
+${config.options?.withPrefix ? `
 
 export type SupaColumnPre<Table extends SupaTable> =
 	{
@@ -43,37 +33,20 @@ export type SupaRowPre<Table extends SupaTable> =
 	{ [Column in SupaColumnPre<Table>]: SupaValuePre<Table, Column>; }
 
 ` : ``}
-
-export type Includes = Array<SupaTable | Array<SupaTable | Includes>>;
-
-// the interface is WIP
-// TODO: the class must be extremely type safe
-type Methods = {
-	// select: (table: SupaTable, version: string, filter: Filter<T>)
-	get: (object: object, table: SupaTable, ...keys: Array<object>) => any
-	${config.options?.withPrefix ? `µ: () => any` : ``}
-	insert: (table: SupaTable, changes: object) => Promise<PostgrestSingleResponse<any[] | any | null>>
-	query: (table: SupaTable, ...columns: Array<SupaColumn<SupaTable>>) => string
-	includedEl: (table: SupaTable, includes: Includes) => boolean
-	subquery: (table: SupaTable, includes: Includes, altName?: string) => string
-	subqueries: (tables: Array<SupaTable>, includes: Includes) => string
+		`,
+		class: `
+type Filter<T extends SupaTable> = {
+  [column in ${pre('SupaColumn')}<T>]?: {
+    [operator in keyof PostgrestFilterBuilder<Database["public"], SupaRow<T>, any>]?: ${pre('SupaValue')}<T, column>
+  }
 }
-type Subqueries = {
-  [table in SupaTable]: (includes: Includes) => string
+
+type SchemaTables = typeof schemaTables
+export type Includes<T extends keyof SchemaTables> = {
+	[table in SchemaTables[T]["rel_from"][number] | SchemaTables[T]["rel_to"][number]]?: string
 }
-type SupaI = Methods & Subqueries
 
-
-export type ExactSupa = Exact<SupaI, Supa>
-
-export class Supa implements ExactSupa {
-	static get<T>(object: T, table: SupaTable, ...keys: Array<keyof T>) {
-		let result: any = object; // TO-DO: no-explicit-any
-		keys.forEach((key) => {
-			result = result[\`\${ table }_\${ String(key) } \`];
-		});
-		return result;
-	}
+export class SupaQ {
 	${config.options?.withPrefix ? `
 		µ<T extends SupaTable>(object: Parsed<T, { [key in SupaColumn<T>]?: any }> & { __table: T }, k: SupaColumnPre<T>) {
 			const table = object.__table
@@ -85,7 +58,6 @@ export class Supa implements ExactSupa {
 			}
 		}
 	` : ``}
-	
 	static async insert<Table extends SupaTable>(
 		table: Table,
 		changes: { 
@@ -104,81 +76,131 @@ export class Supa implements ExactSupa {
 				})
 			);
 		`: `changes`}  
-		const { data, error } = await supa.from(table).insert(payload);
+		const { data, error } = await client.from(table).insert(payload);
 		// console.log(\`insert in \${ String(table) } \`, data, error);
 		return { data, error };
 	}
-	static query<Table extends SupaTable>(table: Table, ...columns: Array<${pre('SupaColumn')}<Table>>) {
-		let result = columns${config.options?.withPrefix ? `.map((column) => \`\${ String(table) }_\${ String(column) } \`)` : ``}.join(', ');
-		if (!String(table).match('_join_')) {
-			result += ${config.options?.withPrefix ? `\`, \${ String(table) } _id\`;` : `\`id;\``} 
+	static async select<T extends keyof SupaQueries, Version extends keyof SupaQueries[T]>(table: T, version: Version, filter?: Filter<T>): Promise<Array<SupaQueries[T][Version] & {
+		set: ()
+	}>> {
+		let query = client.from(table).select(queries[table][version])
+		if (filter) {
+			Object.entries(filter).forEach(([column, filters]) => {
+				Object.entries(filter).forEach(([operator, value]) => {
+					query = query.filter(column, operator, value)
+				})
+			})
 		}
-		return result;
+		const result = await query
+		const data = result.data as Array<SupaQueries[T][Version]>
+		const parsed = suparse(table, data)
+		return parsed
 	}
-	static includedEl(table: SupaTable, includes: Includes) {
-		return includes.find(
-			(element) =>
-				(Array.isArray(element) && element.includes(table)) ||
-				(typeof element === 'string' && element === table)
-		);
+}
+
+		`,
+		config: `
+		type Query<Table extends SupaTable> = {
+			columns: Array<SupaColumn<Table>>
+			includes: Includes<Table>
+		}
+		export type Config = {
+			queries: {
+				[T in SupaTable]?: {
+					[Version: string]: Query<T>
+				}
+			}
+		} & ConfigCommons
+		`,
+		suparse: `
+
+// suparse
+
+export type Parsed<Table extends SupaTable, O extends object> = {
+	__table: Table
+	__version?: string
+	${config.options.withPrefix ? `get<C extends SupaColumn<Table>>(column: C): SupaValue<Table, C>` : ``}
+	set<C extends SupaColumn<Table>>(column: C, value: SupaValue<Table, C>): Promise<PostgrestSingleResponse<any>>
+	delete(): Promise<PostgrestSingleResponse<any>>
+} & {
+		[K in keyof O]?: O[K] extends (infer U)[] ? Parsed<K extends SupaTable ? K : SupaTable, U extends object ? U : object>[] : O[K] extends object ? Parsed<K extends SupaTable ? K : SupaTable, O[K]> : object
+		// [K in keyof O]?: O[K] extends object ? Parsed<K extends SupaTable ? K : SupaTable, O[K]> : O[K] extends (infer U)[] ? Parsed<K extends SupaTable ? K : SupaTable, U extends object ? U : object>[] : object
 	}
-	static subquery(table: SupaTable, includes: Includes, altName?: string): string {
-		const included = this.includedEl(table, includes);
-		if (included) {
-			const array = Array.isArray(included) ? included.slice(1) : [];
-			const result = \`, \${ altName ? altName : table } (\${ this[table](array) })\`;
-			// console.log('Supa.subquery', table, includes, included, array, result);
-			return result;
-		} else {
-			return \`\`;
+
+export function suparse<Table extends keyof SupaQueries, O extends SupaQueries[Table][Version]>(table: Table, object: O, version: Version) {
+	// @ts-ignore
+	const result: Parsed<Table, O> = { ...object }
+	if (object) {
+		Object.entries(object).forEach(entry => {
+			const column = String(entry[0]) as keyof O
+			const value = entry[1]
+			if (Array.isArray(value)) {
+				// @ts-ignore
+				result[column] = value.map(v => {
+					if (typeof v === 'object') {
+						return suparse(String(column) as SupaTable, v) as Parsed<typeof column extends SupaTable ? typeof column : SupaTable, typeof v>
+					} else {
+						return v
+					}
+				})
+			} else if (typeof value === 'object') {
+				// @ts-ignore
+				result[column] = suparse(String(column) as SupaTable, value)
+			} else {
+				result[column] = value
+			}
+		})
+	}
+	return parse(table, version, result)
+}
+
+export function parse<Table extends SupaTable, O extends object>(Table extends keyof SupaQueries, Version extends keyof SupaQueries[T], object: O) {
+	const full_id = ${config.options.withPrefix ? `\`\${ table }_id\` as keyof O` : `"${config.options.id}"` } 
+	const id = object[full_id]
+	return {
+		...object,
+		__table: table,
+		${config.options.withPrefix ? `
+		get<C extends SupaColumn<Table>>(column: C) {
+			const full = \`\${ table }_\${ String(column) } \` as keyof O
+			const result = object[full]
+			return result
+		},
+		` : ``}
+		async set<C extends SupaColumn<Table>>(column: C, value: any) {
+			const full = ${config.options.withPrefix ? `\`\${ table }_\${ String(column) } \` as keyof O` : `column`}
+			const result = await sup.from(table).update({ [full]: value }).eq(String(full_id), id).select(\`\${ String(full_id) }, \${ String(full) } \`)
+			return result
+		},
+		async delete(options?: { hard?: boolean }) {
+			const isHard = options?.hard
+			let result: PostgrestSingleResponse<any>
+			if (isHard) {
+				result = await sup.from(table).delete().eq(String(full_id), id).select(String(full_id))
+			} else {
+				const is_deleted = \`is_deleted\` as SupaColumn<Table>
+				result = await this.set(is_deleted, true)
+			}
+			return result
 		}
 	}
-	static subqueries(tables: Array<SupaTable>, includes: Includes): string {
-		const result = tables.map((t) => this.subquery(t, includes)).join('\\n');
-		return result;
-	}
-	${holes.queries || queriesStarter(``)}
-}
-type Filter<T extends SupaTable> = {
-  [column in ${pre('SupaColumn')}<T>]?: {
-    [operator in keyof PostgrestFilterBuilder<Database["public"], SupaRow<T>, any>]?: ${pre('SupaValue')}<T, column>
-  }
-}
-export async function select<T extends SupaTable>(table: T, filter: Filter<T>) {
-  let query = supa.from(table).select('*')
-
-  Object.entries(filter).forEach(([column, filters]) => {
-    Object.entries(filter).forEach(([operator, value]) => {
-      query = query.filter(column, operator, value)
-    })
-  })
-  await query
 }
 
-type Query<Table extends SupaTable> = {
-	columns: Array<SupaColumn<Table>>
-	relations?: Array<SupaTable> // but relations are already defined by schema so users should only focus on providing includes:Includes and the columns
-	includes: Includes
+export function suparrse<Table extends SupaTable, O extends object>(table: Table, arr: O[]) {
+	return arr.map(o => (suparse(table, o)))
 }
 
-export type Config = {
-	queries: {
-		[T in SupaTable]?: {
-			[Version: string]: Query<T>
-		}
-	}
-} & ConfigCommons
-
-const supabaseClient: SupabaseClient = createClient<Database>(${config.supabase.dbUrl || `https://${config.supabase.projectId}.supabase.co`}, environment.SUPABASE_ANON_KEY);
-
-export default Supa;
 `
-
-export const queriesStarter = (queries: string) => {
-
-	return `
-	${zoneDelimiters.start}
-	${queries}
-	${zoneDelimiters.stop}
-`
+	}
 }
+
+export default (config: ConfigCommons) => `
+
+export const client: SupabaseClient = createClient<Database>("${'dbUrl' in config.supabase ? config.supabase.dbUrl : `https://${config.supabase.projectId}.supabase.co`}", "${config.supabase.key}");
+${builder(config).types}
+${builder(config).suparse}
+${builder(config).class}
+${builder(config).config}
+
+export default SupaQ;
+`

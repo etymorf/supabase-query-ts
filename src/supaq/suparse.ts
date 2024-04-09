@@ -1,3 +1,5 @@
+// TODO: integrate suparse into the package
+
 // suparse is a little magic on top of supabase-js
 // that actually makes it really easy to interact with the DB
 // I've never used any ORM before but it may bring similar functionality
@@ -6,10 +8,12 @@
 // the client wants to delete the row ? get the row, then call .delete()
 // ...
 
+
+// suparse
+
 import type { PostgrestSingleResponse } from "@supabase/supabase-js"
-import type { SupaColumn, SupaTable, SupaValue } from "./gen/supaq.ts"
-import sup from "./supabase.ts"
-// import { invalidateAll } from '$app/navigation'
+import type { SupaTable, SupaColumn, SupaValue } from './gen/supaq'
+import { client as sup } from './gen/supaq'
 
 export type Parsed<Table extends SupaTable, O extends object> = {
 	__table: Table
@@ -22,12 +26,14 @@ export type Parsed<Table extends SupaTable, O extends object> = {
 	}
 
 export function suparse<Table extends SupaTable, O extends object>(table: Table, object: O): Parsed<Table, O> {
+	// @ts-ignore
 	const result: Parsed<Table, O> = { ...object }
 	if (object) {
 		Object.entries(object).forEach(entry => {
 			const column = String(entry[0]) as keyof O
 			const value = entry[1]
 			if (Array.isArray(value)) {
+				// @ts-ignore
 				result[column] = value.map(v => {
 					if (typeof v === 'object') {
 						return suparse(String(column) as SupaTable, v) as Parsed<typeof column extends SupaTable ? typeof column : SupaTable, typeof v>
@@ -36,6 +42,7 @@ export function suparse<Table extends SupaTable, O extends object>(table: Table,
 					}
 				})
 			} else if (typeof value === 'object') {
+				// @ts-ignore
 				result[column] = suparse(String(column) as SupaTable, value)
 			} else {
 				result[column] = value
@@ -54,16 +61,14 @@ export function parse<Table extends SupaTable, O extends object>(table: Table, o
 		...object,
 		__table: table,
 		get<C extends SupaColumn<Table>>(column: C) {
-			const full = `${table}_${String(column)}` as keyof O
+			const full = `${table}_${String(column)} ` as keyof O
 			const result = object[full]
 			return result
 		},
 		async set<C extends SupaColumn<Table>>(column: C, value: any) {
-			const full = `${table}_${String(column)}` as keyof O
-			const result = await sup.from(table).update({ [full]: value }).eq(String(full_id), id).select(`${String(full_id)}, ${String(full)}`)
+			const full = `${table}_${String(column)} ` as keyof O
+			const result = await sup.from(table).update({ [full]: value }).eq(String(full_id), id).select(`${String(full_id)}, ${String(full)} `)
 
-			// TO DO: find another solution (too demanding on network requests?)
-			// await invalidateAll()
 			return result
 		},
 		async delete(options?: { hard?: boolean }) {
@@ -73,7 +78,7 @@ export function parse<Table extends SupaTable, O extends object>(table: Table, o
 			if (isHard) {
 				result = await sup.from(table).delete().eq(String(full_id), id).select(String(full_id))
 			} else {
-				const full_is_deleted = `${table}_is_deleted`
+
 				const is_deleted = `is_deleted` as SupaColumn<Table>
 				result = await this.set(is_deleted, true)
 			}

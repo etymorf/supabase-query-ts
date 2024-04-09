@@ -179,4 +179,4 @@ Generated:
 Internals:
 - supastic -> supaqbase gen queries
 - suparse -> used in SupaQ.select
-- supatyper -> supaqbase gen types
+- supats -> supaqbase gen types

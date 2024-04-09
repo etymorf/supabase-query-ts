@@ -17,7 +17,8 @@
     "build": "tsup index.ts --format cjs,esm --dts",
     "release": "pnpm run build && changeset publish",
     "tsc": "cd src/supaq/lib && tsc --target es2022",
-    "supats": "tsc ./src/supaq/supats.ts --target es2022 --module es2022 --moduleResolution node --skipLibCheck && cd src/supaq && node supats.js"
+    "supats": "tsc && cd src/supaq && node supats.js",
+    "test-gen": "cd src/supaq/lib && tsc jsc.ts --target es2022 --module es2022 --moduleResolution node --skipLibCheck && node tests.js " 
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",

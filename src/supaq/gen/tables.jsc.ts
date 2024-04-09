@@ -1,726 +1,6 @@
 export default {
   "type": "object",
   "properties": {
-    "ana_articles": {
-      "type": "object",
-      "properties": {
-        "Row": {
-          "type": "object",
-          "properties": {
-            "a_alphagram": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "a_artid": {
-              "type": "number"
-            },
-            "a_title": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "a_title_flat": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "a_title_flat_r": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "a_title_r": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "todel1": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "todel2": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "todel3": {
-              "type": [
-                "null",
-                "string"
-              ]
-            }
-          },
-          "required": [
-            "a_alphagram",
-            "a_artid",
-            "a_title",
-            "a_title_flat",
-            "a_title_flat_r",
-            "a_title_r",
-            "todel1",
-            "todel2",
-            "todel3"
-          ]
-        },
-        "Insert": {
-          "type": "object",
-          "properties": {
-            "a_alphagram": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "a_artid": {
-              "type": "number"
-            },
-            "a_title": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "a_title_flat": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "a_title_flat_r": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "a_title_r": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "todel1": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "todel2": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "todel3": {
-              "type": [
-                "null",
-                "string"
-              ]
-            }
-          },
-          "required": [
-            "a_artid"
-          ]
-        },
-        "Update": {
-          "type": "object",
-          "properties": {
-            "a_alphagram": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "a_artid": {
-              "type": "number"
-            },
-            "a_title": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "a_title_flat": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "a_title_flat_r": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "a_title_r": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "todel1": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "todel2": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "todel3": {
-              "type": [
-                "null",
-                "string"
-              ]
-            }
-          }
-        },
-        "Relationships": {
-          "type": "array",
-          "minItems": 0,
-          "maxItems": 0
-        }
-      },
-      "required": [
-        "Insert",
-        "Relationships",
-        "Row",
-        "Update"
-      ]
-    },
-    "ana_defs": {
-      "type": "object",
-      "properties": {
-        "Row": {
-          "type": "object",
-          "properties": {
-            "d_def": {
-              "type": "string"
-            },
-            "d_defid": {
-              "type": "number"
-            },
-            "d_lexid": {
-              "type": "number"
-            },
-            "d_num": {
-              "type": [
-                "null",
-                "number"
-              ]
-            }
-          },
-          "required": [
-            "d_def",
-            "d_defid",
-            "d_lexid",
-            "d_num"
-          ]
-        },
-        "Insert": {
-          "type": "object",
-          "properties": {
-            "d_def": {
-              "type": "string"
-            },
-            "d_defid": {
-              "type": "number"
-            },
-            "d_lexid": {
-              "type": "number"
-            },
-            "d_num": {
-              "type": [
-                "null",
-                "number"
-              ]
-            }
-          },
-          "required": [
-            "d_defid",
-            "d_lexid"
-          ]
-        },
-        "Update": {
-          "type": "object",
-          "properties": {
-            "d_def": {
-              "type": "string"
-            },
-            "d_defid": {
-              "type": "number"
-            },
-            "d_lexid": {
-              "type": "number"
-            },
-            "d_num": {
-              "type": [
-                "null",
-                "number"
-              ]
-            }
-          }
-        },
-        "Relationships": {
-          "type": "array",
-          "items": [
-            {
-              "type": "object",
-              "properties": {
-                "foreignKeyName": {
-                  "type": "string",
-                  "enum": [
-                    "ana_defs_d_lexid_fkey"
-                  ]
-                },
-                "columns": {
-                  "type": "array",
-                  "items": [
-                    {
-                      "type": "string",
-                      "enum": [
-                        "d_lexid"
-                      ]
-                    }
-                  ],
-                  "minItems": 1,
-                  "maxItems": 1
-                },
-                "isOneToOne": {
-                  "type": "boolean",
-                  "enum": [
-                    false
-                  ]
-                },
-                "referencedRelation": {
-                  "type": "string",
-                  "enum": [
-                    "ana_lexemes"
-                  ]
-                },
-                "referencedColumns": {
-                  "type": "array",
-                  "items": [
-                    {
-                      "type": "string",
-                      "enum": [
-                        "l_lexid"
-                      ]
-                    }
-                  ],
-                  "minItems": 1,
-                  "maxItems": 1
-                }
-              },
-              "required": [
-                "columns",
-                "foreignKeyName",
-                "isOneToOne",
-                "referencedColumns",
-                "referencedRelation"
-              ]
-            }
-          ],
-          "minItems": 1,
-          "maxItems": 1
-        }
-      },
-      "required": [
-        "Insert",
-        "Relationships",
-        "Row",
-        "Update"
-      ]
-    },
-    "ana_langs": {
-      "type": "object",
-      "properties": {
-        "Row": {
-          "type": "object",
-          "properties": {
-            "lg_lang": {
-              "type": "string"
-            },
-            "lg_num": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "lg_num_min": {
-              "type": [
-                "null",
-                "number"
-              ]
-            }
-          },
-          "required": [
-            "lg_lang",
-            "lg_num",
-            "lg_num_min"
-          ]
-        },
-        "Insert": {
-          "type": "object",
-          "properties": {
-            "lg_lang": {
-              "type": "string"
-            },
-            "lg_num": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "lg_num_min": {
-              "type": [
-                "null",
-                "number"
-              ]
-            }
-          },
-          "required": [
-            "lg_lang"
-          ]
-        },
-        "Update": {
-          "type": "object",
-          "properties": {
-            "lg_lang": {
-              "type": "string"
-            },
-            "lg_num": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "lg_num_min": {
-              "type": [
-                "null",
-                "number"
-              ]
-            }
-          }
-        },
-        "Relationships": {
-          "type": "array",
-          "minItems": 0,
-          "maxItems": 0
-        }
-      },
-      "required": [
-        "Insert",
-        "Relationships",
-        "Row",
-        "Update"
-      ]
-    },
-    "ana_lexemes": {
-      "type": "object",
-      "properties": {
-        "Row": {
-          "type": "object",
-          "properties": {
-            "l_artid": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "l_genre": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "l_is_flexion": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "l_is_gentile": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "l_is_locution": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "l_lang": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "l_lexid": {
-              "type": "number"
-            },
-            "l_num": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "l_rand": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "l_sigle": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "l_type": {
-              "type": [
-                "null",
-                "string"
-              ]
-            }
-          },
-          "required": [
-            "l_artid",
-            "l_genre",
-            "l_is_flexion",
-            "l_is_gentile",
-            "l_is_locution",
-            "l_lang",
-            "l_lexid",
-            "l_num",
-            "l_rand",
-            "l_sigle",
-            "l_type"
-          ]
-        },
-        "Insert": {
-          "type": "object",
-          "properties": {
-            "l_artid": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "l_genre": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "l_is_flexion": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "l_is_gentile": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "l_is_locution": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "l_lang": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "l_lexid": {
-              "type": "number"
-            },
-            "l_num": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "l_rand": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "l_sigle": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "l_type": {
-              "type": [
-                "null",
-                "string"
-              ]
-            }
-          },
-          "required": [
-            "l_lexid"
-          ]
-        },
-        "Update": {
-          "type": "object",
-          "properties": {
-            "l_artid": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "l_genre": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "l_is_flexion": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "l_is_gentile": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "l_is_locution": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "l_lang": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "l_lexid": {
-              "type": "number"
-            },
-            "l_num": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "l_rand": {
-              "type": [
-                "null",
-                "number"
-              ]
-            },
-            "l_sigle": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "l_type": {
-              "type": [
-                "null",
-                "string"
-              ]
-            }
-          }
-        },
-        "Relationships": {
-          "type": "array",
-          "items": [
-            {
-              "type": "object",
-              "properties": {
-                "foreignKeyName": {
-                  "type": "string",
-                  "enum": [
-                    "ana_lexemes_l_artid_fkey"
-                  ]
-                },
-                "columns": {
-                  "type": "array",
-                  "items": [
-                    {
-                      "type": "string",
-                      "enum": [
-                        "l_artid"
-                      ]
-                    }
-                  ],
-                  "minItems": 1,
-                  "maxItems": 1
-                },
-                "isOneToOne": {
-                  "type": "boolean",
-                  "enum": [
-                    false
-                  ]
-                },
-                "referencedRelation": {
-                  "type": "string",
-                  "enum": [
-                    "ana_articles"
-                  ]
-                },
-                "referencedColumns": {
-                  "type": "array",
-                  "items": [
-                    {
-                      "type": "string",
-                      "enum": [
-                        "a_artid"
-                      ]
-                    }
-                  ],
-                  "minItems": 1,
-                  "maxItems": 1
-                }
-              },
-              "required": [
-                "columns",
-                "foreignKeyName",
-                "isOneToOne",
-                "referencedColumns",
-                "referencedRelation"
-              ]
-            }
-          ],
-          "minItems": 1,
-          "maxItems": 1
-        }
-      },
-      "required": [
-        "Insert",
-        "Relationships",
-        "Row",
-        "Update"
-      ]
-    },
     "def": {
       "type": "object",
       "properties": {
@@ -731,6 +11,12 @@ export default {
               "type": "string"
             },
             "deu": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "embedding": {
               "type": [
                 "null",
                 "string"
@@ -788,6 +74,7 @@ export default {
           "required": [
             "created_at",
             "deu",
+            "embedding",
             "eng",
             "epo",
             "esp",
@@ -806,6 +93,12 @@ export default {
               "type": "string"
             },
             "deu": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "embedding": {
               "type": [
                 "null",
                 "string"
@@ -868,6 +161,12 @@ export default {
               "type": "string"
             },
             "deu": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "embedding": {
               "type": [
                 "null",
                 "string"
@@ -1275,35 +574,26 @@ export default {
         "Update"
       ]
     },
-    "lex": {
+    "morph": {
       "type": "object",
       "properties": {
         "Row": {
           "type": "object",
           "properties": {
+            "child_of": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
             "created_at": {
               "type": "string"
             },
-            "de": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "en": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "fr": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
             "id": {
               "type": "number"
+            },
+            "is_word": {
+              "type": "boolean"
             },
             "lang": {
               "type": "string"
@@ -1314,22 +604,10 @@ export default {
                 "number"
               ]
             },
-            "parent": {
+            "morph_of": {
               "type": [
                 "null",
                 "number"
-              ]
-            },
-            "pl": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "ru": {
-              "type": [
-                "null",
-                "string"
               ]
             },
             "text": {
@@ -1337,45 +615,33 @@ export default {
             }
           },
           "required": [
+            "child_of",
             "created_at",
-            "de",
-            "en",
-            "fr",
             "id",
+            "is_word",
             "lang",
             "level_fra",
-            "parent",
-            "pl",
-            "ru",
+            "morph_of",
             "text"
           ]
         },
         "Insert": {
           "type": "object",
           "properties": {
+            "child_of": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
             "created_at": {
               "type": "string"
             },
-            "de": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "en": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "fr": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
             "id": {
               "type": "number"
+            },
+            "is_word": {
+              "type": "boolean"
             },
             "lang": {
               "type": "string"
@@ -1386,22 +652,10 @@ export default {
                 "number"
               ]
             },
-            "parent": {
+            "morph_of": {
               "type": [
                 "null",
                 "number"
-              ]
-            },
-            "pl": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "ru": {
-              "type": [
-                "null",
-                "string"
               ]
             },
             "text": {
@@ -1416,29 +670,20 @@ export default {
         "Update": {
           "type": "object",
           "properties": {
+            "child_of": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
             "created_at": {
               "type": "string"
             },
-            "de": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "en": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "fr": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
             "id": {
               "type": "number"
+            },
+            "is_word": {
+              "type": "boolean"
             },
             "lang": {
               "type": "string"
@@ -1449,22 +694,10 @@ export default {
                 "number"
               ]
             },
-            "parent": {
+            "morph_of": {
               "type": [
                 "null",
                 "number"
-              ]
-            },
-            "pl": {
-              "type": [
-                "null",
-                "string"
-              ]
-            },
-            "ru": {
-              "type": [
-                "null",
-                "string"
               ]
             },
             "text": {
@@ -1586,10 +819,234 @@ export default {
                 "referencedColumns",
                 "referencedRelation"
               ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_lex_morph_of_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph_of"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "morph"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_lex_morph_of_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph_of"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "morph_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_lex_morph_of_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph_of"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "word_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_lex_morph_of_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph_of"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
             }
           ],
-          "minItems": 2,
-          "maxItems": 2
+          "minItems": 6,
+          "maxItems": 6
         }
       },
       "required": [
@@ -1599,7 +1056,7 @@ export default {
         "Update"
       ]
     },
-    "lex_def": {
+    "morph_piece": {
       "type": "object",
       "properties": {
         "Row": {
@@ -1608,21 +1065,32 @@ export default {
             "created_at": {
               "type": "string"
             },
-            "def": {
-              "type": "number"
-            },
             "id": {
+              "type": "string"
+            },
+            "morph": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "morphe": {
               "type": "number"
             },
-            "lex": {
+            "part": {
+              "type": "number"
+            },
+            "piece": {
               "type": "number"
             }
           },
           "required": [
             "created_at",
-            "def",
             "id",
-            "lex"
+            "morph",
+            "morphe",
+            "part",
+            "piece"
           ]
         },
         "Insert": {
@@ -1631,19 +1099,29 @@ export default {
             "created_at": {
               "type": "string"
             },
-            "def": {
-              "type": "number"
-            },
             "id": {
+              "type": "string"
+            },
+            "morph": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "morphe": {
               "type": "number"
             },
-            "lex": {
+            "part": {
+              "type": "number"
+            },
+            "piece": {
               "type": "number"
             }
           },
           "required": [
-            "def",
-            "lex"
+            "morphe",
+            "part",
+            "piece"
           ]
         },
         "Update": {
@@ -1652,13 +1130,22 @@ export default {
             "created_at": {
               "type": "string"
             },
-            "def": {
-              "type": "number"
-            },
             "id": {
+              "type": "string"
+            },
+            "morph": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "morphe": {
               "type": "number"
             },
-            "lex": {
+            "part": {
+              "type": "number"
+            },
+            "piece": {
               "type": "number"
             }
           }
@@ -1672,7 +1159,7 @@ export default {
                 "foreignKeyName": {
                   "type": "string",
                   "enum": [
-                    "lex_def_def_fkey"
+                    "public_morph_piece_morph_fkey"
                   ]
                 },
                 "columns": {
@@ -1681,7 +1168,7 @@ export default {
                     {
                       "type": "string",
                       "enum": [
-                        "def"
+                        "morphe"
                       ]
                     }
                   ],
@@ -1697,7 +1184,7 @@ export default {
                 "referencedRelation": {
                   "type": "string",
                   "enum": [
-                    "def"
+                    "morph"
                   ]
                 },
                 "referencedColumns": {
@@ -1728,7 +1215,7 @@ export default {
                 "foreignKeyName": {
                   "type": "string",
                   "enum": [
-                    "lex_def_def_fkey"
+                    "public_morph_piece_morph_fkey"
                   ]
                 },
                 "columns": {
@@ -1737,7 +1224,7 @@ export default {
                     {
                       "type": "string",
                       "enum": [
-                        "def"
+                        "morphe"
                       ]
                     }
                   ],
@@ -1753,7 +1240,7 @@ export default {
                 "referencedRelation": {
                   "type": "string",
                   "enum": [
-                    "def_theme_view"
+                    "morph_piece_view"
                   ]
                 },
                 "referencedColumns": {
@@ -1762,7 +1249,7 @@ export default {
                     {
                       "type": "string",
                       "enum": [
-                        "def_id"
+                        "morph_id"
                       ]
                     }
                   ],
@@ -1784,7 +1271,7 @@ export default {
                 "foreignKeyName": {
                   "type": "string",
                   "enum": [
-                    "lex_def_lex_fkey"
+                    "public_morph_piece_morph_fkey"
                   ]
                 },
                 "columns": {
@@ -1793,7 +1280,7 @@ export default {
                     {
                       "type": "string",
                       "enum": [
-                        "lex"
+                        "morphe"
                       ]
                     }
                   ],
@@ -1809,7 +1296,231 @@ export default {
                 "referencedRelation": {
                   "type": "string",
                   "enum": [
-                    "lex"
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "word_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_morph_piece_morph_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morphe"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_morph_piece_part_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "part"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "part"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "no"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_morph_piece_puzzle_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "piece"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "morph_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "piece_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_morph_piece_puzzle_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "piece"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "piece"
                   ]
                 },
                 "referencedColumns": {
@@ -1819,6 +1530,342 @@ export default {
                       "type": "string",
                       "enum": [
                         "id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_morph_piece_puzzle_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "piece"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "piece_word_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_morph_piece_puzzle_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "piece"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "piece_morph_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_morph_piece_word_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "morph_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "piece_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_morph_piece_word_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "piece"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_morph_piece_word_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "piece_word_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_morph_piece_word_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "piece_morph_id"
                       ]
                     }
                   ],
@@ -1835,8 +1882,8 @@ export default {
               ]
             }
           ],
-          "minItems": 3,
-          "maxItems": 3
+          "minItems": 13,
+          "maxItems": 13
         }
       },
       "required": [
@@ -2226,6 +2273,683 @@ export default {
         "Update"
       ]
     },
+    "piece": {
+      "type": "object",
+      "properties": {
+        "Row": {
+          "type": "object",
+          "properties": {
+            "created_at": {
+              "type": "string"
+            },
+            "def": {
+              "type": "number"
+            },
+            "id": {
+              "type": "number"
+            },
+            "level_eng": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "level_fra": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "morph": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "created_at",
+            "def",
+            "id",
+            "level_eng",
+            "level_fra",
+            "morph"
+          ]
+        },
+        "Insert": {
+          "type": "object",
+          "properties": {
+            "created_at": {
+              "type": "string"
+            },
+            "def": {
+              "type": "number"
+            },
+            "id": {
+              "type": "number"
+            },
+            "level_eng": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "level_fra": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "morph": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "def",
+            "morph"
+          ]
+        },
+        "Update": {
+          "type": "object",
+          "properties": {
+            "created_at": {
+              "type": "string"
+            },
+            "def": {
+              "type": "number"
+            },
+            "id": {
+              "type": "number"
+            },
+            "level_eng": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "level_fra": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
+            "morph": {
+              "type": "number"
+            }
+          }
+        },
+        "Relationships": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "lex_def_def_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "def"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "def"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "lex_def_def_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "def"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "def_theme_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "def_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "lex_def_def_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "def"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "def_word_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "lex_def_def_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "def"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "def_morph_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "lex_def_lex_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "morph"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "lex_def_lex_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "morph_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "lex_def_lex_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "word_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "lex_def_lex_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_lex_def_level_fra_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "level_fra"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "level"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_piece_level_eng_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "level_eng"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "level"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            }
+          ],
+          "minItems": 10,
+          "maxItems": 10
+        }
+      },
+      "required": [
+        "Insert",
+        "Relationships",
+        "Row",
+        "Update"
+      ]
+    },
     "same_roots": {
       "type": "object",
       "properties": {
@@ -2313,7 +3037,231 @@ export default {
                 "referencedRelation": {
                   "type": "string",
                   "enum": [
-                    "lex"
+                    "morph"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "same_roots_baby_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "baby"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "morph_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "same_roots_baby_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "baby"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "word_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "same_roots_baby_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "baby"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "same_roots_origin_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "origin"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "morph"
                   ]
                 },
                 "referencedColumns": {
@@ -2369,7 +3317,7 @@ export default {
                 "referencedRelation": {
                   "type": "string",
                   "enum": [
-                    "lex"
+                    "morph_piece_view"
                   ]
                 },
                 "referencedColumns": {
@@ -2378,7 +3326,119 @@ export default {
                     {
                       "type": "string",
                       "enum": [
-                        "id"
+                        "morph_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "same_roots_origin_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "origin"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "word_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "same_roots_origin_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "origin"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph_id"
                       ]
                     }
                   ],
@@ -2395,8 +3455,8 @@ export default {
               ]
             }
           ],
-          "minItems": 2,
-          "maxItems": 2
+          "minItems": 8,
+          "maxItems": 8
         }
       },
       "required": [
@@ -2664,6 +3724,118 @@ export default {
                 "foreignKeyName": {
                   "type": "string",
                   "enum": [
+                    "theme_def_def_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "def"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "def_word_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "theme_def_def_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "def"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "def_morph_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
                     "theme_def_theme_fkey"
                   ]
                 },
@@ -2771,8 +3943,8 @@ export default {
               ]
             }
           ],
-          "minItems": 4,
-          "maxItems": 4
+          "minItems": 6,
+          "maxItems": 6
         }
       },
       "required": [
@@ -2983,6 +4155,12 @@ export default {
             "lang": {
               "type": "string"
             },
+            "radical": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
             "type": {
               "type": [
                 "null",
@@ -2997,6 +4175,7 @@ export default {
             "created_at",
             "id",
             "lang",
+            "radical",
             "type",
             "word"
           ]
@@ -3012,6 +4191,12 @@ export default {
             },
             "lang": {
               "type": "string"
+            },
+            "radical": {
+              "type": [
+                "null",
+                "number"
+              ]
             },
             "type": {
               "type": [
@@ -3040,6 +4225,12 @@ export default {
             "lang": {
               "type": "string"
             },
+            "radical": {
+              "type": [
+                "null",
+                "number"
+              ]
+            },
             "type": {
               "type": [
                 "null",
@@ -3054,6 +4245,230 @@ export default {
         "Relationships": {
           "type": "array",
           "items": [
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_word_radical_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "radical"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "morph_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "piece_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_word_radical_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "radical"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "piece"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_word_radical_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "radical"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "piece_word_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "public_word_radical_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "radical"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "piece_morph_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
             {
               "type": "object",
               "properties": {
@@ -3167,8 +4582,8 @@ export default {
               ]
             }
           ],
-          "minItems": 2,
-          "maxItems": 2
+          "minItems": 6,
+          "maxItems": 6
         }
       },
       "required": [
@@ -3362,6 +4777,118 @@ export default {
                 "foreignKeyName": {
                   "type": "string",
                   "enum": [
+                    "word_def_def_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "def"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "def_word_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "word_def_def_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "def"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "def_morph_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
                     "word_def_word_fkey"
                   ]
                 },
@@ -3413,8 +4940,8 @@ export default {
               ]
             }
           ],
-          "minItems": 3,
-          "maxItems": 3
+          "minItems": 5,
+          "maxItems": 5
         }
       },
       "required": [
@@ -3432,6 +4959,12 @@ export default {
           "properties": {
             "created_at": {
               "type": "string"
+            },
+            "flexion": {
+              "type": [
+                "null",
+                "string"
+              ]
             },
             "part": {
               "type": "number"
@@ -3451,6 +4984,7 @@ export default {
           },
           "required": [
             "created_at",
+            "flexion",
             "part",
             "piece",
             "puzzle",
@@ -3462,6 +4996,12 @@ export default {
           "properties": {
             "created_at": {
               "type": "string"
+            },
+            "flexion": {
+              "type": [
+                "null",
+                "string"
+              ]
             },
             "part": {
               "type": "number"
@@ -3490,6 +5030,12 @@ export default {
           "properties": {
             "created_at": {
               "type": "string"
+            },
+            "flexion": {
+              "type": [
+                "null",
+                "string"
+              ]
             },
             "part": {
               "type": "number"
@@ -3573,7 +5119,7 @@ export default {
                 "foreignKeyName": {
                   "type": "string",
                   "enum": [
-                    "word_piece_part_fkey"
+                    "word_piece_piece_fkey"
                   ]
                 },
                 "columns": {
@@ -3582,7 +5128,7 @@ export default {
                     {
                       "type": "string",
                       "enum": [
-                        "part"
+                        "piece"
                       ]
                     }
                   ],
@@ -3598,7 +5144,7 @@ export default {
                 "referencedRelation": {
                   "type": "string",
                   "enum": [
-                    "word_piece_view"
+                    "morph"
                   ]
                 },
                 "referencedColumns": {
@@ -3607,7 +5153,7 @@ export default {
                     {
                       "type": "string",
                       "enum": [
-                        "part_no"
+                        "id"
                       ]
                     }
                   ],
@@ -3654,7 +5200,231 @@ export default {
                 "referencedRelation": {
                   "type": "string",
                   "enum": [
-                    "lex"
+                    "morph_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_piece_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "piece"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "word_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_piece_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "piece"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "morph_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_puzzle_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "puzzle"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "morph_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "piece_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_puzzle_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "puzzle"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "piece"
                   ]
                 },
                 "referencedColumns": {
@@ -3710,7 +5480,7 @@ export default {
                 "referencedRelation": {
                   "type": "string",
                   "enum": [
-                    "lex_def"
+                    "word_piece_view"
                   ]
                 },
                 "referencedColumns": {
@@ -3719,7 +5489,63 @@ export default {
                     {
                       "type": "string",
                       "enum": [
-                        "id"
+                        "piece_word_id"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                }
+              },
+              "required": [
+                "columns",
+                "foreignKeyName",
+                "isOneToOne",
+                "referencedColumns",
+                "referencedRelation"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "foreignKeyName": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_puzzle_fkey"
+                  ]
+                },
+                "columns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "puzzle"
+                      ]
+                    }
+                  ],
+                  "minItems": 1,
+                  "maxItems": 1
+                },
+                "isOneToOne": {
+                  "type": "boolean",
+                  "enum": [
+                    false
+                  ]
+                },
+                "referencedRelation": {
+                  "type": "string",
+                  "enum": [
+                    "word_piece_view"
+                  ]
+                },
+                "referencedColumns": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "piece_morph_id"
                       ]
                     }
                   ],
@@ -3792,8 +5618,8 @@ export default {
               ]
             }
           ],
-          "minItems": 5,
-          "maxItems": 5
+          "minItems": 10,
+          "maxItems": 10
         }
       },
       "required": [
@@ -3805,19 +5631,16 @@ export default {
     }
   },
   "required": [
-    "ana_articles",
-    "ana_defs",
-    "ana_langs",
-    "ana_lexemes",
     "def",
     "history",
     "lang",
     "level",
-    "lex",
-    "lex_def",
+    "morph",
+    "morph_piece",
     "part",
     "phrase",
     "phrase_piece",
+    "piece",
     "same_roots",
     "theme",
     "theme_def",

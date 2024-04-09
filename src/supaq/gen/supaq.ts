@@ -1,18 +1,11 @@
 
 
-// import type { Exact } from 'type-fest';
-
-import { PostgrestFilterBuilder, PostgrestSingleResponse } from "@supabase/postgrest-js"
-// import { SupabaseClient } from '@supabase/supabase-js';
+import { PostgrestFilterBuilder, PostgrestSingleResponse } from '@supabase/postgrest-js'
+import { SupabaseClient, createClient } from '@supabase/supabase-js';
 
 // from SupaQ
-// import arr2obj from '../helpers/arr2obj';
-// import type { Parsed } from '../suparse';
-
-// set by user
-import supa from '../supabase';
-
-
+// import type { Parsed } from '../lib/suparse';
+import type { ConfigCommons } from '../lib/util';
 
 export type Json =
   | string
@@ -25,143 +18,11 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      ana_articles: {
-        Row: {
-          a_alphagram: string | null
-          a_artid: number
-          a_title: string | null
-          a_title_flat: string | null
-          a_title_flat_r: string | null
-          a_title_r: string | null
-          todel1: string | null
-          todel2: string | null
-          todel3: string | null
-        }
-        Insert: {
-          a_alphagram?: string | null
-          a_artid: number
-          a_title?: string | null
-          a_title_flat?: string | null
-          a_title_flat_r?: string | null
-          a_title_r?: string | null
-          todel1?: string | null
-          todel2?: string | null
-          todel3?: string | null
-        }
-        Update: {
-          a_alphagram?: string | null
-          a_artid?: number
-          a_title?: string | null
-          a_title_flat?: string | null
-          a_title_flat_r?: string | null
-          a_title_r?: string | null
-          todel1?: string | null
-          todel2?: string | null
-          todel3?: string | null
-        }
-        Relationships: []
-      }
-      ana_defs: {
-        Row: {
-          d_def: string
-          d_defid: number
-          d_lexid: number
-          d_num: number | null
-        }
-        Insert: {
-          d_def?: string
-          d_defid: number
-          d_lexid: number
-          d_num?: number | null
-        }
-        Update: {
-          d_def?: string
-          d_defid?: number
-          d_lexid?: number
-          d_num?: number | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "ana_defs_d_lexid_fkey"
-            columns: ["d_lexid"]
-            isOneToOne: false
-            referencedRelation: "ana_lexemes"
-            referencedColumns: ["l_lexid"]
-          }
-        ]
-      }
-      ana_langs: {
-        Row: {
-          lg_lang: string
-          lg_num: number | null
-          lg_num_min: number | null
-        }
-        Insert: {
-          lg_lang: string
-          lg_num?: number | null
-          lg_num_min?: number | null
-        }
-        Update: {
-          lg_lang?: string
-          lg_num?: number | null
-          lg_num_min?: number | null
-        }
-        Relationships: []
-      }
-      ana_lexemes: {
-        Row: {
-          l_artid: number | null
-          l_genre: string | null
-          l_is_flexion: number | null
-          l_is_gentile: number | null
-          l_is_locution: number | null
-          l_lang: string | null
-          l_lexid: number
-          l_num: number | null
-          l_rand: number | null
-          l_sigle: string | null
-          l_type: string | null
-        }
-        Insert: {
-          l_artid?: number | null
-          l_genre?: string | null
-          l_is_flexion?: number | null
-          l_is_gentile?: number | null
-          l_is_locution?: number | null
-          l_lang?: string | null
-          l_lexid: number
-          l_num?: number | null
-          l_rand?: number | null
-          l_sigle?: string | null
-          l_type?: string | null
-        }
-        Update: {
-          l_artid?: number | null
-          l_genre?: string | null
-          l_is_flexion?: number | null
-          l_is_gentile?: number | null
-          l_is_locution?: number | null
-          l_lang?: string | null
-          l_lexid?: number
-          l_num?: number | null
-          l_rand?: number | null
-          l_sigle?: string | null
-          l_type?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "ana_lexemes_l_artid_fkey"
-            columns: ["l_artid"]
-            isOneToOne: false
-            referencedRelation: "ana_articles"
-            referencedColumns: ["a_artid"]
-          }
-        ]
-      }
       def: {
         Row: {
           created_at: string
           deu: string | null
+          embedding: string | null
           eng: string | null
           epo: string | null
           esp: string | null
@@ -175,6 +36,7 @@ export type Database = {
         Insert: {
           created_at?: string
           deu?: string | null
+          embedding?: string | null
           eng?: string | null
           epo?: string | null
           esp?: string | null
@@ -188,6 +50,7 @@ export type Database = {
         Update: {
           created_at?: string
           deu?: string | null
+          embedding?: string | null
           eng?: string | null
           epo?: string | null
           esp?: string | null
@@ -239,7 +102,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "word"
             referencedColumns: ["id"]
-          }
+          },
         ]
       }
       lang: {
@@ -275,44 +138,35 @@ export type Database = {
         }
         Relationships: []
       }
-      lex: {
+      morph: {
         Row: {
+          child_of: number | null
           created_at: string
-          de: string | null
-          en: string | null
-          fr: string | null
           id: number
+          is_word: boolean
           lang: string
           level_fra: number | null
-          parent: number | null
-          pl: string | null
-          ru: string | null
+          morph_of: number | null
           text: string
         }
         Insert: {
+          child_of?: number | null
           created_at?: string
-          de?: string | null
-          en?: string | null
-          fr?: string | null
           id?: number
+          is_word?: boolean
           lang: string
           level_fra?: number | null
-          parent?: number | null
-          pl?: string | null
-          ru?: string | null
+          morph_of?: number | null
           text: string
         }
         Update: {
+          child_of?: number | null
           created_at?: string
-          de?: string | null
-          en?: string | null
-          fr?: string | null
           id?: number
+          is_word?: boolean
           lang?: string
           level_fra?: number | null
-          parent?: number | null
-          pl?: string | null
-          ru?: string | null
+          morph_of?: number | null
           text?: string
         }
         Relationships: [
@@ -329,50 +183,154 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "level"
             referencedColumns: ["id"]
-          }
+          },
+          {
+            foreignKeyName: "public_lex_morph_of_fkey"
+            columns: ["morph_of"]
+            isOneToOne: false
+            referencedRelation: "morph"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_lex_morph_of_fkey"
+            columns: ["morph_of"]
+            isOneToOne: false
+            referencedRelation: "morph_piece_view"
+            referencedColumns: ["morph_id"]
+          },
+          {
+            foreignKeyName: "public_lex_morph_of_fkey"
+            columns: ["morph_of"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["word_id"]
+          },
+          {
+            foreignKeyName: "public_lex_morph_of_fkey"
+            columns: ["morph_of"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["morph_id"]
+          },
         ]
       }
-      lex_def: {
+      morph_piece: {
         Row: {
           created_at: string
-          def: number
-          id: number
-          lex: number
+          id: string
+          morph: number | null
+          morphe: number
+          part: number
+          piece: number
         }
         Insert: {
           created_at?: string
-          def: number
-          id?: number
-          lex: number
+          id?: string
+          morph?: number | null
+          morphe: number
+          part: number
+          piece: number
         }
         Update: {
           created_at?: string
-          def?: number
-          id?: number
-          lex?: number
+          id?: string
+          morph?: number | null
+          morphe?: number
+          part?: number
+          piece?: number
         }
         Relationships: [
           {
-            foreignKeyName: "lex_def_def_fkey"
-            columns: ["def"]
+            foreignKeyName: "public_morph_piece_morph_fkey"
+            columns: ["morphe"]
             isOneToOne: false
-            referencedRelation: "def"
+            referencedRelation: "morph"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "lex_def_def_fkey"
-            columns: ["def"]
+            foreignKeyName: "public_morph_piece_morph_fkey"
+            columns: ["morphe"]
             isOneToOne: false
-            referencedRelation: "def_theme_view"
-            referencedColumns: ["def_id"]
+            referencedRelation: "morph_piece_view"
+            referencedColumns: ["morph_id"]
           },
           {
-            foreignKeyName: "lex_def_lex_fkey"
-            columns: ["lex"]
+            foreignKeyName: "public_morph_piece_morph_fkey"
+            columns: ["morphe"]
             isOneToOne: false
-            referencedRelation: "lex"
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["word_id"]
+          },
+          {
+            foreignKeyName: "public_morph_piece_morph_fkey"
+            columns: ["morphe"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["morph_id"]
+          },
+          {
+            foreignKeyName: "public_morph_piece_part_fkey"
+            columns: ["part"]
+            isOneToOne: false
+            referencedRelation: "part"
+            referencedColumns: ["no"]
+          },
+          {
+            foreignKeyName: "public_morph_piece_puzzle_fkey"
+            columns: ["piece"]
+            isOneToOne: false
+            referencedRelation: "morph_piece_view"
+            referencedColumns: ["piece_id"]
+          },
+          {
+            foreignKeyName: "public_morph_piece_puzzle_fkey"
+            columns: ["piece"]
+            isOneToOne: false
+            referencedRelation: "piece"
             referencedColumns: ["id"]
-          }
+          },
+          {
+            foreignKeyName: "public_morph_piece_puzzle_fkey"
+            columns: ["piece"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["piece_word_id"]
+          },
+          {
+            foreignKeyName: "public_morph_piece_puzzle_fkey"
+            columns: ["piece"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["piece_morph_id"]
+          },
+          {
+            foreignKeyName: "public_morph_piece_word_fkey"
+            columns: ["morph"]
+            isOneToOne: false
+            referencedRelation: "morph_piece_view"
+            referencedColumns: ["piece_id"]
+          },
+          {
+            foreignKeyName: "public_morph_piece_word_fkey"
+            columns: ["morph"]
+            isOneToOne: false
+            referencedRelation: "piece"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_morph_piece_word_fkey"
+            columns: ["morph"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["piece_word_id"]
+          },
+          {
+            foreignKeyName: "public_morph_piece_word_fkey"
+            columns: ["morph"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["piece_morph_id"]
+          },
         ]
       }
       part: {
@@ -401,7 +359,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "type_piece"
             referencedColumns: ["id"]
-          }
+          },
         ]
       }
       phrase: {
@@ -452,7 +410,105 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "word_def"
             referencedColumns: ["id"]
-          }
+          },
+        ]
+      }
+      piece: {
+        Row: {
+          created_at: string
+          def: number
+          id: number
+          level_eng: number | null
+          level_fra: number | null
+          morph: number
+        }
+        Insert: {
+          created_at?: string
+          def: number
+          id?: number
+          level_eng?: number | null
+          level_fra?: number | null
+          morph: number
+        }
+        Update: {
+          created_at?: string
+          def?: number
+          id?: number
+          level_eng?: number | null
+          level_fra?: number | null
+          morph?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lex_def_def_fkey"
+            columns: ["def"]
+            isOneToOne: false
+            referencedRelation: "def"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lex_def_def_fkey"
+            columns: ["def"]
+            isOneToOne: false
+            referencedRelation: "def_theme_view"
+            referencedColumns: ["def_id"]
+          },
+          {
+            foreignKeyName: "lex_def_def_fkey"
+            columns: ["def"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["def_word_id"]
+          },
+          {
+            foreignKeyName: "lex_def_def_fkey"
+            columns: ["def"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["def_morph_id"]
+          },
+          {
+            foreignKeyName: "lex_def_lex_fkey"
+            columns: ["morph"]
+            isOneToOne: false
+            referencedRelation: "morph"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lex_def_lex_fkey"
+            columns: ["morph"]
+            isOneToOne: false
+            referencedRelation: "morph_piece_view"
+            referencedColumns: ["morph_id"]
+          },
+          {
+            foreignKeyName: "lex_def_lex_fkey"
+            columns: ["morph"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["word_id"]
+          },
+          {
+            foreignKeyName: "lex_def_lex_fkey"
+            columns: ["morph"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["morph_id"]
+          },
+          {
+            foreignKeyName: "public_lex_def_level_fra_fkey"
+            columns: ["level_fra"]
+            isOneToOne: false
+            referencedRelation: "level"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_piece_level_eng_fkey"
+            columns: ["level_eng"]
+            isOneToOne: false
+            referencedRelation: "level"
+            referencedColumns: ["id"]
+          },
         ]
       }
       same_roots: {
@@ -476,16 +532,58 @@ export type Database = {
             foreignKeyName: "same_roots_baby_fkey"
             columns: ["baby"]
             isOneToOne: false
-            referencedRelation: "lex"
+            referencedRelation: "morph"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "same_roots_baby_fkey"
+            columns: ["baby"]
+            isOneToOne: false
+            referencedRelation: "morph_piece_view"
+            referencedColumns: ["morph_id"]
+          },
+          {
+            foreignKeyName: "same_roots_baby_fkey"
+            columns: ["baby"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["word_id"]
+          },
+          {
+            foreignKeyName: "same_roots_baby_fkey"
+            columns: ["baby"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["morph_id"]
+          },
+          {
+            foreignKeyName: "same_roots_origin_fkey"
+            columns: ["origin"]
+            isOneToOne: false
+            referencedRelation: "morph"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "same_roots_origin_fkey"
             columns: ["origin"]
             isOneToOne: false
-            referencedRelation: "lex"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: "morph_piece_view"
+            referencedColumns: ["morph_id"]
+          },
+          {
+            foreignKeyName: "same_roots_origin_fkey"
+            columns: ["origin"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["word_id"]
+          },
+          {
+            foreignKeyName: "same_roots_origin_fkey"
+            columns: ["origin"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["morph_id"]
+          },
         ]
       }
       theme: {
@@ -544,6 +642,20 @@ export type Database = {
             referencedColumns: ["def_id"]
           },
           {
+            foreignKeyName: "theme_def_def_fkey"
+            columns: ["def"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["def_word_id"]
+          },
+          {
+            foreignKeyName: "theme_def_def_fkey"
+            columns: ["def"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["def_morph_id"]
+          },
+          {
             foreignKeyName: "theme_def_theme_fkey"
             columns: ["theme"]
             isOneToOne: false
@@ -556,7 +668,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "theme"
             referencedColumns: ["id"]
-          }
+          },
         ]
       }
       type_piece: {
@@ -615,6 +727,7 @@ export type Database = {
           created_at: string
           id: number
           lang: string
+          radical: number | null
           type: string | null
           word: string
         }
@@ -622,6 +735,7 @@ export type Database = {
           created_at?: string
           id?: number
           lang: string
+          radical?: number | null
           type?: string | null
           word: string
         }
@@ -629,10 +743,39 @@ export type Database = {
           created_at?: string
           id?: number
           lang?: string
+          radical?: number | null
           type?: string | null
           word?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "public_word_radical_fkey"
+            columns: ["radical"]
+            isOneToOne: false
+            referencedRelation: "morph_piece_view"
+            referencedColumns: ["piece_id"]
+          },
+          {
+            foreignKeyName: "public_word_radical_fkey"
+            columns: ["radical"]
+            isOneToOne: false
+            referencedRelation: "piece"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_word_radical_fkey"
+            columns: ["radical"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["piece_word_id"]
+          },
+          {
+            foreignKeyName: "public_word_radical_fkey"
+            columns: ["radical"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["piece_morph_id"]
+          },
           {
             foreignKeyName: "word_lang_fkey"
             columns: ["lang"]
@@ -646,7 +789,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "type_word"
             referencedColumns: ["id"]
-          }
+          },
         ]
       }
       word_def: {
@@ -684,17 +827,32 @@ export type Database = {
             referencedColumns: ["def_id"]
           },
           {
+            foreignKeyName: "word_def_def_fkey"
+            columns: ["def"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["def_word_id"]
+          },
+          {
+            foreignKeyName: "word_def_def_fkey"
+            columns: ["def"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["def_morph_id"]
+          },
+          {
             foreignKeyName: "word_def_word_fkey"
             columns: ["word"]
             isOneToOne: false
             referencedRelation: "word"
             referencedColumns: ["id"]
-          }
+          },
         ]
       }
       word_piece: {
         Row: {
           created_at: string
+          flexion: string | null
           part: number
           piece: number | null
           puzzle: number
@@ -702,6 +860,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          flexion?: string | null
           part: number
           piece?: number | null
           puzzle: number
@@ -709,6 +868,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          flexion?: string | null
           part?: number
           piece?: number | null
           puzzle?: number
@@ -723,25 +883,60 @@ export type Database = {
             referencedColumns: ["no"]
           },
           {
-            foreignKeyName: "word_piece_part_fkey"
-            columns: ["part"]
+            foreignKeyName: "word_piece_piece_fkey"
+            columns: ["piece"]
             isOneToOne: false
-            referencedRelation: "word_piece_view"
-            referencedColumns: ["part_no"]
+            referencedRelation: "morph"
+            referencedColumns: ["id"]
           },
           {
             foreignKeyName: "word_piece_piece_fkey"
             columns: ["piece"]
             isOneToOne: false
-            referencedRelation: "lex"
+            referencedRelation: "morph_piece_view"
+            referencedColumns: ["morph_id"]
+          },
+          {
+            foreignKeyName: "word_piece_piece_fkey"
+            columns: ["piece"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["word_id"]
+          },
+          {
+            foreignKeyName: "word_piece_piece_fkey"
+            columns: ["piece"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["morph_id"]
+          },
+          {
+            foreignKeyName: "word_piece_puzzle_fkey"
+            columns: ["puzzle"]
+            isOneToOne: false
+            referencedRelation: "morph_piece_view"
+            referencedColumns: ["piece_id"]
+          },
+          {
+            foreignKeyName: "word_piece_puzzle_fkey"
+            columns: ["puzzle"]
+            isOneToOne: false
+            referencedRelation: "piece"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "word_piece_puzzle_fkey"
             columns: ["puzzle"]
             isOneToOne: false
-            referencedRelation: "lex_def"
-            referencedColumns: ["id"]
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["piece_word_id"]
+          },
+          {
+            foreignKeyName: "word_piece_puzzle_fkey"
+            columns: ["puzzle"]
+            isOneToOne: false
+            referencedRelation: "word_piece_view"
+            referencedColumns: ["piece_morph_id"]
           },
           {
             foreignKeyName: "word_piece_word_fkey"
@@ -749,7 +944,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "word"
             referencedColumns: ["id"]
-          }
+          },
         ]
       }
     }
@@ -763,33 +958,55 @@ export type Database = {
         }
         Relationships: []
       }
+      morph_piece_view: {
+        Row: {
+          id: string | null
+          morph_id: number | null
+          piece_id: number | null
+          piece_morph_text: string | null
+          text: string | null
+        }
+        Relationships: []
+      }
       word_piece_view: {
         Row: {
-          part_no: number | null
-          root_text: string | null
+          def_morph_fra: string | null
+          def_morph_id: number | null
+          def_word_fra: string | null
+          def_word_id: number | null
+          id: string | null
+          morph_id: number | null
+          morph_text: string | null
+          piece_morph_id: number | null
+          piece_word_id: number | null
           word_id: number | null
-          word_lang: string | null
-          word_word: string | null
+          word_text: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "word_lang_fkey"
-            columns: ["word_lang"]
-            isOneToOne: false
-            referencedRelation: "lang"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "word_piece_word_fkey"
-            columns: ["word_id"]
-            isOneToOne: false
-            referencedRelation: "word"
-            referencedColumns: ["id"]
-          }
-        ]
+        Relationships: []
       }
     }
     Functions: {
+      ai_search_def: {
+        Args: {
+          query_embedding: string
+          match_threshold: number
+          match_count: number
+        }
+        Returns: {
+          created_at: string
+          deu: string | null
+          embedding: string | null
+          eng: string | null
+          epo: string | null
+          esp: string | null
+          etylex: boolean
+          fra: string | null
+          id: number
+          ita: string | null
+          pl: string | null
+          ru: string | null
+        }[]
+      }
       crea_word_1: {
         Args: {
           id_param: number
@@ -919,13 +1136,13 @@ export type Database = {
           def_param: Json
           pieces_param: Json
         }
-        Returns: unknown
+        Returns: number[]
       }
       fun_increment_array: {
         Args: {
           arr: number[]
         }
-        Returns: unknown
+        Returns: number[]
       }
       get_definitions: {
         Args: {
@@ -1178,25 +1395,25 @@ export type Database = {
         }[]
       }
       get_or_insert_def:
-      | {
-        Args: {
-          fr: string
-          en: string
-          de: string
-        }
-        Returns: undefined
-      }
-      | {
-        Args: {
-          fr?: string
-          en?: string
-          de?: string
-          eo?: string
-          it?: string
-          es?: string
-        }
-        Returns: undefined
-      }
+        | {
+            Args: {
+              fr: string
+              en: string
+              de: string
+            }
+            Returns: undefined
+          }
+        | {
+            Args: {
+              fr?: string
+              en?: string
+              de?: string
+              eo?: string
+              it?: string
+              es?: string
+            }
+            Returns: undefined
+          }
       get_or_insert_def_1: {
         Args: {
           fr?: string
@@ -1250,31 +1467,31 @@ export type Database = {
           texts_param: string[]
           lang_param: string
         }
-        Returns: unknown
+        Returns: number[]
       }
       get_words_to_study:
-      | {
-        Args: {
-          user_param: number
-          theme_param: string
-        }
-        Returns: unknown
-      }
-      | {
-        Args: {
-          user_param: number
-          theme_param: string
-          limit_param?: number
-        }
-        Returns: unknown
-      }
+        | {
+            Args: {
+              user_param: number
+              theme_param: string
+            }
+            Returns: number[]
+          }
+        | {
+            Args: {
+              user_param: number
+              theme_param: string
+              limit_param?: number
+            }
+            Returns: number[]
+          }
       get_words_to_study_2: {
         Args: {
           user_param: number
           theme_param: string
           limit_param?: number
         }
-        Returns: unknown
+        Returns: number[]
       }
       get_words_to_study_3: {
         Args: {
@@ -1282,32 +1499,32 @@ export type Database = {
           theme_param: string
           limit_param?: number
         }
-        Returns: unknown
+        Returns: number[]
       }
       get_words_to_study_4:
-      | {
-        Args: {
-          user_param: number
-          theme_param: string
-          limit_param?: number
-        }
-        Returns: unknown
-      }
-      | {
-        Args: {
-          user_param: string
-          theme_param: string
-          limit_param?: number
-        }
-        Returns: unknown
-      }
+        | {
+            Args: {
+              user_param: number
+              theme_param: string
+              limit_param?: number
+            }
+            Returns: string[]
+          }
+        | {
+            Args: {
+              user_param: string
+              theme_param: string
+              limit_param?: number
+            }
+            Returns: string[]
+          }
       get_words_to_study_5: {
         Args: {
           user_param: string
           theme_param: string
           limit_param?: number
         }
-        Returns: unknown
+        Returns: string[]
       }
       get_words_to_study_6: {
         Args: {
@@ -1315,7 +1532,7 @@ export type Database = {
           theme_param: string
           limit_param?: number
         }
-        Returns: unknown
+        Returns: number[]
       }
       js_function: {
         Args: Record<PropertyKey, never>
@@ -1385,6 +1602,10 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: number
       }
+      start_morph: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
       start_word: {
         Args: Record<PropertyKey, never>
         Returns: number
@@ -1393,7 +1614,7 @@ export type Database = {
         Args: {
           def_param: Json
         }
-        Returns: unknown
+        Returns: number[]
       }
     }
     Enums: {
@@ -1405,85 +1626,118 @@ export type Database = {
   }
 }
 
+type PublicSchema = Database[Extract<keyof Database, "public">]
+
 export type Tables<
   PublicTableNameOrOptions extends
-  | keyof (Database["public"]["Tables"] & Database["public"]["Views"])
-  | { schema: keyof Database },
+    | keyof (PublicSchema["Tables"] & PublicSchema["Views"])
+    | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-  ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
-    Database[PublicTableNameOrOptions["schema"]]["Views"])
-  : never = never
+    ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
+        Database[PublicTableNameOrOptions["schema"]]["Views"])
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
-    Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+      Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
       Row: infer R
     }
-  ? R
-  : never
-  : PublicTableNameOrOptions extends keyof (Database["public"]["Tables"] &
-    Database["public"]["Views"])
-  ? (Database["public"]["Tables"] &
-    Database["public"]["Views"])[PublicTableNameOrOptions] extends {
-      Row: infer R
-    }
-  ? R
-  : never
-  : never
+    ? R
+    : never
+  : PublicTableNameOrOptions extends keyof (PublicSchema["Tables"] &
+        PublicSchema["Views"])
+    ? (PublicSchema["Tables"] &
+        PublicSchema["Views"])[PublicTableNameOrOptions] extends {
+        Row: infer R
+      }
+      ? R
+      : never
+    : never
 
 export type TablesInsert<
   PublicTableNameOrOptions extends
-  | keyof Database["public"]["Tables"]
-  | { schema: keyof Database },
+    | keyof PublicSchema["Tables"]
+    | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-  ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-  : never = never
+    ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-    Insert: infer I
-  }
-  ? I
-  : never
-  : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
-  ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-    Insert: infer I
-  }
-  ? I
-  : never
-  : never
+      Insert: infer I
+    }
+    ? I
+    : never
+  : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
+    ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
+        Insert: infer I
+      }
+      ? I
+      : never
+    : never
 
 export type TablesUpdate<
   PublicTableNameOrOptions extends
-  | keyof Database["public"]["Tables"]
-  | { schema: keyof Database },
+    | keyof PublicSchema["Tables"]
+    | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-  ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-  : never = never
+    ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-    Update: infer U
-  }
-  ? U
-  : never
-  : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
-  ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-    Update: infer U
-  }
-  ? U
-  : never
-  : never
+      Update: infer U
+    }
+    ? U
+    : never
+  : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
+    ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
+        Update: infer U
+      }
+      ? U
+      : never
+    : never
 
 export type Enums<
   PublicEnumNameOrOptions extends
-  | keyof Database["public"]["Enums"]
-  | { schema: keyof Database },
+    | keyof PublicSchema["Enums"]
+    | { schema: keyof Database },
   EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
-  ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"]
-  : never = never
+    ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"]
+    : never = never,
 > = PublicEnumNameOrOptions extends { schema: keyof Database }
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
-  : PublicEnumNameOrOptions extends keyof Database["public"]["Enums"]
-  ? Database["public"]["Enums"][PublicEnumNameOrOptions]
-  : never
+  : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
+    ? PublicSchema["Enums"][PublicEnumNameOrOptions]
+    : never
+
+			
+			const schemaTables = {"def":{"columns":{"created_at":"string","deu":"string","embedding":"string","eng":"string","epo":"string","esp":"string","etylex":"boolean","fra":"string","id":"number","ita":"string","pl":"string","ru":"string"},"rel_to":[],"rel_from":["piece","theme_def","word_def"]},"user":{"columns":{"id":"string","name":"string"},"rel_to":[],"rel_from":["history"]},"history":{"columns":{"duration":"number","level":"number","status":"boolean","time":"string","user":"string","word":"number"},"rel_to":["user","word"],"rel_from":[]},"word":{"columns":{"created_at":"string","id":"number","lang":"string","radical":"number","type":"string","word":"string"},"rel_to":["morph_piece_view","piece","word_piece_view","lang","type_word"],"rel_from":["history","word_def","word_piece"]},"lang":{"columns":{"created_at":"string","id":"string","name":"string"},"rel_to":[],"rel_from":["morph","word"]},"level":{"columns":{"description":"string","id":"number"},"rel_to":[],"rel_from":["morph","piece"]},"morph":{"columns":{"child_of":"number","created_at":"string","id":"number","is_word":"boolean","lang":"string","level_fra":"number","morph_of":"number","text":"string"},"rel_to":["lang","level","morph","morph_piece_view","word_piece_view"],"rel_from":["morph","morph_piece","piece","same_roots","word_piece"]},"morph_piece_view":{"columns":{},"rel_to":[],"rel_from":["morph","morph_piece","piece","same_roots","word","word_piece"]},"word_piece_view":{"columns":{},"rel_to":[],"rel_from":["morph","morph_piece","piece","same_roots","theme_def","word","word_def","word_piece"]},"morph_piece":{"columns":{"created_at":"string","id":"string","morph":"number","morphe":"number","part":"number","piece":"number"},"rel_to":["morph","morph_piece_view","word_piece_view","part","piece"],"rel_from":[]},"part":{"columns":{"created_at":"string","n":"number","no":"number","part":"string"},"rel_to":["type_piece"],"rel_from":["morph_piece","word_piece"]},"piece":{"columns":{"created_at":"string","def":"number","id":"number","level_eng":"number","level_fra":"number","morph":"number"},"rel_to":["def","def_theme_view","word_piece_view","morph","morph_piece_view","level"],"rel_from":["morph_piece","word","word_piece"]},"type_piece":{"columns":{"created_at":"string","id":"string"},"rel_to":[],"rel_from":["part"]},"phrase":{"columns":{"created_at":"string","id":"number"},"rel_to":[],"rel_from":["phrase_piece"]},"phrase_piece":{"columns":{"created_at":"string","order":"number","phrase":"number","piece":"number"},"rel_to":["phrase","word_def"],"rel_from":[]},"word_def":{"columns":{"created_at":"string","def":"number","id":"number","word":"number"},"rel_to":["def","def_theme_view","word_piece_view","word"],"rel_from":["phrase_piece"]},"def_theme_view":{"columns":{},"rel_to":[],"rel_from":["piece","theme_def","word_def"]},"same_roots":{"columns":{"baby":"number","created_at":"string","origin":"number"},"rel_to":["morph","morph_piece_view","word_piece_view"],"rel_from":[]},"theme":{"columns":{"created_at":"string","en":"string","eo":"string","fr":"string","id":"string"},"rel_to":[],"rel_from":["theme_def"]},"theme_def":{"columns":{"created_at":"string","def":"number","theme":"string"},"rel_to":["def","def_theme_view","word_piece_view","theme"],"rel_from":[]},"type_word":{"columns":{"created_at":"string","en":"string","fr":"string","id":"string"},"rel_to":[],"rel_from":["word"]},"word_piece":{"columns":{"created_at":"string","flexion":"string","part":"number","piece":"number","puzzle":"number","word":"number"},"rel_to":["part","morph","morph_piece_view","word_piece_view","piece","word"],"rel_from":[]}} as const
+			
+			export type SupaQueries = {
+		def: {
+			
+				big: 
+			{
+			deu: string
+			}
+			  
+				
+			}
+			piece: {
+			
+				huge: 
+			{
+			def: number
+id: number
+			}
+			  
+				
+			}
+			
+		}
+		
+			const queries: {[T in keyof SupaQueries]: {[V in keyof SupaQueries[T]]: string}} = {"def":{"big":"deu"},"piece":{"huge":"def, id"}}
+			
+
+export const client: SupabaseClient = createClient<Database>("https://qlqsvedhqhjowlpbylvq.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFscXN2ZWRocWhqb3dscGJ5bHZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTMzNDc0MDEsImV4cCI6MjAwODkyMzQwMX0.ECi9MD7FJiKjPHs_bCZGrpWmdX9wp5LIDnIipzAxfQU");
 
 
 // SupaQ helper types
@@ -1492,152 +1746,147 @@ export type DB = Database['public']['Tables'];
 export type SupaTable = keyof DB;
 
 export type SupaColumn<Table extends SupaTable> =
-  keyof DB[Table]['Row'];
+	keyof DB[Table]['Row'];
 
 export type SupaValue<Table extends SupaTable, Column extends SupaColumn<Table>> =
-  DB[Table]['Row'][Column];
+	DB[Table]['Row'][Column];
 
 export type SupaRow<Table extends SupaTable> =
-  { [Column in SupaColumn<Table>]: SupaValue<Table, Column>; };
+	{ [Column in SupaColumn<Table>]: SupaValue<Table, Column>; };
 
-type Includeed<Tables extends SupaTable> = { [T in Tables]: string }
-type Included<Tables extends SupaTable> = { [table in Tables]: string }
-export type Includes<Table extends SupaTable = SupaTable> = Array<SupaTable | Array<SupaTable | Includes>>;
-const test = [
-  {
-    def: "big"
-  },
-  {
-    lex_def: "mini"
-  }
-]
 
-/* 
-[ lex-all ] > [ lex_def-huge ] [ def-big > type-mini ]
-*/
 
-// the interface is WIP
-// TODO: the class must be extremely type safe
-type Methods = {
-  // select: (table: SupaTable, version: string, filter: Filter<T>)
-  get: (object: object, table: SupaTable, ...keys: Array<object>) => any
+		
 
-  insert: (table: SupaTable, changes: object) => Promise<PostgrestSingleResponse<any[] | any | null>>
-  query: (table: SupaTable, ...columns: Array<SupaColumn<SupaTable>>) => string
-  includedEl: (table: SupaTable, includes: Includes) => boolean
-  subquery: (table: SupaTable, includes: Includes, altName?: string) => string
-  subqueries: (tables: Array<SupaTable>, includes: Includes) => string
+
+// suparse
+
+export type Parsed<Table extends SupaTable, O extends object> = {
+	__table: Table
+	
+	set<C extends SupaColumn<Table>>(column: C, value: SupaValue<Table, C>): Promise<PostgrestSingleResponse<any>>
+	delete(): Promise<PostgrestSingleResponse<any>>
+} & {
+		[K in keyof O]?: O[K] extends (infer U)[] ? Parsed<K extends SupaTable ? K : SupaTable, U extends object ? U : object>[] : O[K] extends object ? Parsed<K extends SupaTable ? K : SupaTable, O[K]> : object
+		// [K in keyof O]?: O[K] extends object ? Parsed<K extends SupaTable ? K : SupaTable, O[K]> : O[K] extends (infer U)[] ? Parsed<K extends SupaTable ? K : SupaTable, U extends object ? U : object>[] : object
+	}
+
+export function suparse<Table extends SupaTable, O extends object>(table: Table, object: O): Parsed<Table, O> {
+	// @ts-ignore
+	const result: Parsed<Table, O> = { ...object }
+	if (object) {
+		Object.entries(object).forEach(entry => {
+			const column = String(entry[0]) as keyof O
+			const value = entry[1]
+			if (Array.isArray(value)) {
+				// @ts-ignore
+				result[column] = value.map(v => {
+					if (typeof v === 'object') {
+						return suparse(String(column) as SupaTable, v) as Parsed<typeof column extends SupaTable ? typeof column : SupaTable, typeof v>
+					} else {
+						return v
+					}
+				})
+			} else if (typeof value === 'object') {
+				// @ts-ignore
+				result[column] = suparse(String(column) as SupaTable, value)
+			} else {
+				result[column] = value
+			}
+		})
+	}
+	// return result
+	return parse(table, result)
 }
-type Subqueries = {
-  [table in SupaTable]: (includes: Includes) => string
+
+export function parse<Table extends SupaTable, O extends object>(table: Table, object: O) {
+	const full_id = "id"
+	const id = object[full_id]
+	return {
+		...object,
+		__table: table,
+		
+		async set<C extends SupaColumn<Table>>(column: C, value: any) {
+			const full = column
+			const result = await sup.from(table).update({ [full]: value }).eq(String(full_id), id).select(`${ String(full_id) }, ${ String(full) } `)
+			return result
+		},
+		async delete(options?: { hard?: boolean }) {
+			const isHard = options?.hard
+			let result: PostgrestSingleResponse<any>
+			if (isHard) {
+				result = await sup.from(table).delete().eq(String(full_id), id).select(String(full_id))
+			} else {
+				const is_deleted = `is_deleted` as SupaColumn<Table>
+				result = await this.set(is_deleted, true)
+			}
+
+			return result
+		}
+	}
 }
-type SupaI = Methods & Subqueries
 
-
-// export type ExactSupa = Exact<SupaI, Supa>
-
-
-export class Supa {
-  static get<T>(object: T, table: SupaTable, ...keys: Array<keyof T>) {
-    let result: any = object; // TO-DO: no-explicit-any
-    keys.forEach((key) => {
-      result = result[`${table}_${String(key)} `];
-    });
-    return result;
-  }
-
-
-  static async insert<Table extends SupaTable>(
-    table: Table,
-    changes: {
-      [C in SupaColumn<Table>]: SupaValue<Table, C>
-    }
-  ) {
-    const payload = changes
-    const { data, error } = await supa.from(table).insert(payload);
-    // console.log(`insert in ${ String(table) } `, data, error);
-    return { data, error };
-  }
-  static query<Table extends SupaTable>(table: Table, ...columns: Array<SupaColumn<Table>>) {
-    let result = columns.join(', ');
-    if (!String(table).match('_join_')) {
-      result += `id;`
-    }
-    return result;
-  }
-  static includedEl(table: SupaTable, includes: Includes) {
-    return includes.find(
-      (element) =>
-        (Array.isArray(element) && element.includes(table)) ||
-        (typeof element === 'string' && element === table)
-    );
-  }
-  static subquery(table: SupaTable, includes: Includes, altName?: string): string {
-    const included = this.includedEl(table, includes);
-    if (included) {
-      const array = Array.isArray(included) ? included.slice(1) : [];
-      const result = `, ${altName ? altName : table} (${this[table](array)})`;
-      // console.log('Supa.subquery', table, includes, included, array, result);
-      return result;
-    } else {
-      return ``;
-    }
-  }
-  static subqueries(tables: Array<SupaTable>, includes: Includes): string {
-    const result = tables.map((t) => this.subquery(t, includes)).join('\n');
-    return result;
-  }
-
-
-  // DO NOT DELETE ANYTHING, EVEN THE COMMENTS, OUTSIDE YOUR ZONE
-  // YOUR ZONE STARTS HERE: please refer to the docs
-
-
-
-
-  // YOUR ZONE STOPS HERE
-
-
+export function suparrse<Table extends SupaTable, O extends object>(table: Table, arr: O[]) {
+	return arr.map(o => (suparse(table, o)))
 }
+
+
+
 type Filter<T extends SupaTable> = {
   [column in SupaColumn<T>]?: {
     [operator in keyof PostgrestFilterBuilder<Database["public"], SupaRow<T>, any>]?: SupaValue<T, column>
   }
 }
-export async function select<T extends SupaTable>(table: T, filter: Filter<T>) {
-  let query = supa.from(table).select('*')
 
-  Object.entries(filter).forEach(([column, filters]) => {
-    Object.entries(filter).forEach(([operator, value]) => {
-      query = query.filter(column, operator, value)
-    })
-  })
-  await query
+type SchemaTables = typeof schemaTables
+export type Includes<T extends keyof SchemaTables> = {
+	[table in SchemaTables[T]["rel_from"][number] | SchemaTables[T]["rel_to"][number]]?: string
 }
 
-type Query<Table extends SupaTable> = {
-  columns: Array<SupaColumn<Table>>
-  relations?: Array<SupaTable> // but relations are already defined by schema so users should only focus on providing includes + columns
-  includes: Includes<Table>
+export class SupaQ {
+	
+	static async insert<Table extends SupaTable>(
+		table: Table,
+		changes: { 
+			[C in SupaColumn<Table>]: SupaValue<Table, C>
+		}
+	) {
+		const payload = changes  
+		const { data, error } = await client.from(table).insert(payload);
+		// console.log(`insert in ${ String(table) } `, data, error);
+		return { data, error };
+	}
+	static async select<T extends keyof SupaQueries, Version extends keyof SupaQueries[T]>(table: T, version: Version, filter?: Filter<T>): Promise<Array<SupaQueries[T][Version] & {
+    set<Column extends keyof SupaQueries[T][Version]>: (column: Column) => any
+  }>> {
+		let query = client.from(table).select(queries[table][version])
+		if (filter) {
+			Object.entries(filter).forEach(([column, filters]) => {
+				Object.entries(filter).forEach(([operator, value]) => {
+					query = query.filter(column, operator, value)
+				})
+			})
+		}
+		const result = await query
+		const data = result.data as Array<SupaQueries[T][Version]>
+		const parsed = suparse(table, data)
+		return parsed
+	}
 }
 
-export type Config<> = {
-  queries: {
-    [T in SupaTable]?: {
-      [Version: string]: Query<T>
-    }
-  }
-  supabase: {
-    key: string
-    projectId?: string
-    local?: boolean
-    linked?: boolean
-    dbUrl?: string
-  }
-  options?: {
-    withPrefix?: boolean
-    executable?: 'npx' | 'pnpx' | null | ''
-  }
-}
+		
 
-export default Supa;
+		type Query<Table extends SupaTable> = {
+			columns: Array<SupaColumn<Table>>
+			includes: Includes<Table>
+		}
+		export type Config = {
+			queries: {
+				[T in SupaTable]?: {
+					[Version: string]: Query<T>
+				}
+			}
+		} & ConfigCommons
+		
+
+export default SupaQ;

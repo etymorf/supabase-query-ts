@@ -1,16 +1,29 @@
+// @ts-ignore
 import type { Config } from "./gen/supaq"
-import environment from "../environment.js" // as weird as it seems, importing from a .js is what's best
+import environment from "../environment.js"
 const config: Config = {
 	queries: {
 		def: {
 			big: {
 				columns: ["deu"],
-				includes: ["lex_def"]
+				includes: { }
 			}
-		}
+		},
+		piece: {
+			huge: {
+				columns: ["def", "id"],
+				includes: { }
+			}
+		},
+
 	},
 	supabase: {
-		key: environment.SUPABASE_ANON_KEY
+		key: environment.SUPABASE_ANON_KEY,
+		projectId: environment.SUPABASE_PROJECT_ID
+	},
+	options: {
+		executable: ``,
+		id: `id`
 	}
 }
 export default config

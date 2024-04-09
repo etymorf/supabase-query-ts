@@ -21,8 +21,12 @@ export async function getPath(fullPath) {
 export function parseConfigOptions(options) {
     // sets the default
     if (options) {
-        if (!options?.executable)
+        if (!(options?.executable || "executable" in options)) {
             options.executable = ``;
+        }
+        if (!(options?.id || "id" in options)) {
+            options.id = `id`;
+        }
     }
     return options;
 }
@@ -30,15 +34,15 @@ export function getCommandSupa(config) {
     const options = config.options;
     const executable = options.executable;
     let commandSupa = `${executable} supabase gen types typescript `;
-    const { projectId, local, linked, dbUrl } = config.supabase;
-    if (projectId) {
-        commandSupa += `--project-id ${projectId} `;
+    const { local, linked } = config.supabase;
+    if ('projectId' in config.supabase) {
+        commandSupa += `--project-id ${config.supabase.projectId} `;
     }
     else if (local || linked) {
         commandSupa += `--${local ? `local` : `linked`}`;
     }
-    else if (dbUrl) {
-        commandSupa += `--${dbUrl}`;
+    else if ('dbUrl' in config.supabase) {
+        commandSupa += `--db-url ${config.supabase.dbUrl}`;
     }
     else {
         throw new Error("SupaQ Config: Must specify one of --local, --linked, --project-id, or --db-url");
@@ -50,46 +54,13 @@ export function out(text, dir) {
         dir = `gen`;
     return `${dir}/${text}`;
 }
-export function parseConfigQueries(queries) {
-    let text = `
-	`;
-    queries.word["big"].columns;
-    Object.entries(queries).forEach(([table, versions]) => {
-        Object.entries(versions).forEach(([version, query]) => {
-            const t = `
-			return \` 
-				\${this.query(
-					"${table}", 
-					${query.columns.map((c) => (`"${c}"`)).join(", ")}
-				)}
-			\`
-			`;
-        });
-    });
-}
 export const encoder = { encoding: 'utf8' };
-/*
-static partner(includes: Includes, lang: Lang): string {
-        return `
-            ${this.query(
-            'partner',
-            this.loc('description', lang),
-            this.loc('subtitle', lang),
-            'name',
-            'adress',
-            'geo'
-        )}
-            ${this.subqueries(
-            ['partner_type', 'island', 'partner_join_feature', 'offer', 'partner_join_language'],
-            includes,
-            lang
-        )}
-            ${this.subquery(
-            'distance',
-            this.includedEl('distance', includes) ? [['distance', ['partner', 'partner_type']]] : [],
-            lang,
-            'distance!distance_partner_id_a_fkey'
-        )}
-        `;
-    }
-*/ 
+export function defaultExportToJson(string) {
+    return JSON.parse(string.replace("export default ", ""));
+}
+export default {
+    output: out('supaq.ts'),
+    typeTables: out("tables.ts"),
+    schemaTables: out("tables.jsc.ts"),
+    parsedTables: out("tables.parsed.json")
+};
