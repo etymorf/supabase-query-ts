@@ -102,8 +102,8 @@ export class SupaQ {
 		}
 		export type Config = {
 			queries: {
-				[T in SupaTable]?: {
-					[Version: string]: Query<T>
+				[Table in SupaTable]?: {
+					[Version: string]: Query<Table>
 				}
 			}
 		} & ConfigCommons

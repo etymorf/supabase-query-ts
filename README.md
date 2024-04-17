@@ -58,15 +58,7 @@ The config is split into 3 parts:
 - options
 - queries: all your queries will be centralized here
 
-#### options
-
-##### moreFiles
-
-2 more representations of your table structure will be in your folder: 
-- tables.ts
-- tables.jsc.ts
-
-#### queries
+#### config.queries
 
 Before starting writing queries, run SupaQ for the first time.
 
@@ -79,6 +71,7 @@ It generated a file called `supaq.ts`. Everytime you change the config or your s
 Now, go back to your config file. Replace the type import to get auto-completion and type safety.
 
 ```
+// import type { ConfigCommons as Config } from 'supabase-query-ts'
 import type { Config } from './supaq.ts'
 
 const config: Config = {
@@ -107,20 +100,32 @@ Here, you saw an example of how to write queries. It may look intimidating, so l
 ```
 export type Config = {
 	queries: {
-		[T in SupaTable]?: {
-			[Version: string]: Query<T>
+		[Table in SupaTable]?: {
+			[Version: string]: {
+				columns: Array<SupaColumn<Table>>
+				includes: Includes<Table>
+			}
 		}
 	}
 } & ConfigCommons
-type Query<Table extends SupaTable> = {
-	columns: Array<SupaColumn<Table>>
-	includes: Includes<Table>
-}
 ```
 
-Each table can have multiple versions of queries. Each version selects columns, and chooses to include or not the subtables by adding { subtable: "version_of_query" } to includes.
+Includes is an object that says that you want to include a subquery:
+`{ [table]: version }`
+So `includes: { "user": "short" }` means "include the short query for the table 'user'". In this case, it will include only the column 'name'.
+
+Each table can have multiple versions of queries. Each version selects columns and subqueries.
 
 Try it!
+
+#### config.options
+
+##### moreFiles
+
+2 more representations of your table structure will be in your folder: 
+- tables.ts
+- tables.jsc.ts
+
 
 #### supaq.ts
 
@@ -129,6 +134,8 @@ It delivers you:
 - the SupaQ class with the .select() and .insert() methods
 - helper types
 - the parser: used internally in SupaQ.select()
+
+
 
 ##### SupaQ class
 
@@ -163,6 +170,7 @@ An object deeply passed down into components got metadata of the table where it 
 `const name = data[0].name // type string` -> get a typed value
 `await data[1].set('age', '18') // type error : age is a number` -> update the row
 `await data[2].delete()` -> delete the row (in the config you can opt-in for soft deletion)
+
 
 
 ## The rest
