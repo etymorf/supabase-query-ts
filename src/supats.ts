@@ -2,6 +2,7 @@ import * as util from 'util'
 import { exec as exec_base } from 'child_process'
 const exec = util.promisify(exec_base)
 import * as fs from 'fs'
+import * as pathh from 'path'
 
 import path, { getPath, getCommandSupa, encoder, parseConfigOptions, defaultExportToJson } from "./lib/path.js"
 import bonus from './lib/bonus.js'
@@ -26,25 +27,38 @@ async function getConfig(fullPath: string) {
 	path = `${path}.js`
 	try {
 		// console.log(`will import ${path}`)
-		const imported = await import(path)
+		// TODO: the path here should be relative to the SupaQ package itself
+		// I have no idea how to get this relative path
+		const absoluteFile = `file://${pathh.resolve(path)}`
+
+		const absoluteDirArr = absoluteFile.split('\\'); absoluteDirArr.pop();
+		const absoluteDir = absoluteDirArr.join('\\')
+
+		const relativeDirArr = path.split('/'); relativeDirArr.pop();
+		const relativeDir = relativeDirArr.join('/')
+
+		const imported = await import(absoluteFile)
 		config = imported.default as ConfigCommons
 		// console.log(config)
 		const options = parseConfigOptions(config.options)
-		return { ...config, options }
+		return { ...config, options, absoluteDir, relativeDir }
 	} catch (error) {
 		console.error(error)
 	}
 }
 
-async function gen(config: ConfigCommons) {
+async function gen(config: ConfigCommons & { absoluteDir: string; relativeDir: string }) {
+	function out(incompletePath: string) {
+		return `${config.relativeDir}/${incompletePath}`
+		// return `file:///${config.absoluteDir}\\${incompletePath}`
+	}
 	const commandSupa = getCommandSupa(config)
 	const { stdout: outSupa, stderr: errSupa } = await exec(commandSupa)
-	if (!errSupa) {
-		fs.writeFileSync(path.typeTables, justTables(outSupa), encoder)
-		const { stdout: outSchema, stderr: errSchema } = await exec(`${config.options.executable} ts-generate-schema ${path.typeTables} --out .`)
-		if (!errSchema) {
-
-			const schemaTables = parseSchema(defaultExportToJson(fs.readFileSync(path.schemaTables, encoder)))
+	try {
+		fs.writeFileSync(out(path.typeTables), justTables(outSupa), encoder)
+		const { stdout: outSchema, stderr: errSchema } = await exec(`${config.options.executable} ts-generate-schema ${out(path.typeTables)} --out .`)
+		try {
+			const schemaTables = parseSchema(defaultExportToJson(fs.readFileSync(out(path.schemaTables), encoder)))
 			const schemaTablesText = `
 			const schemaTables = ${JSON.stringify(schemaTables)} as const
 			
@@ -52,9 +66,14 @@ async function gen(config: ConfigCommons) {
 			const dataTypes = SupaGen.dataTypes(config.queries, schemaTables)
 			const queriesText = SupaGen.queriesText(config.queries)
 			const concat = imports() + outSupa + schemaTablesText + dataTypes + queriesText + bonus(config)
-			fs.writeFileSync(path.output, concat)
+			fs.writeFileSync(out(path.output), concat)
+		} catch (error) {
+			console.error(error, errSchema, outSchema)
 		}
+	} catch (error) {
+		console.error(error, errSupa)
 	}
+
 }
 
 async function main() {

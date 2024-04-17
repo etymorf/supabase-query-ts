@@ -25,8 +25,8 @@ export async function getPath(fullPath: string) {
 export function parseConfigOptions(options: ConfigOptions) {
 	// sets the default
 	if (options) {
-		if (!(options?.executable || "executable" in options)) {options.executable = ``}
-		if (!(options?.id || "id" in options)) {options.id = `id`}
+		if (!(options?.executable || "executable" in options)) { options.executable = `` }
+		if (!(options?.id || "id" in options)) { options.id = `id` }
 	}
 	return options as RequiredDeep<ConfigOptions>
 }
@@ -35,7 +35,7 @@ export function getCommandSupa(config: ConfigCommons) {
 	const options = config.options
 	const executable = options.executable
 	let commandSupa = `${executable} supabase gen types typescript `
-	const {  local, linked } = config.supabase
+	const { local, linked } = config.supabase
 	if ('projectId' in config.supabase) {
 		commandSupa += `--project-id ${config.supabase.projectId} `;
 	} else if (local || linked) {
@@ -48,10 +48,10 @@ export function getCommandSupa(config: ConfigCommons) {
 	return commandSupa
 }
 
-export function out(text: string, dir?: string) {
-	if (!dir) dir = `gen`
-	return `${dir}/${text}`
-}
+// function out(text: string, dir?: string) {
+// 	if (!dir) dir = `gen`
+// 	return `${dir}/${text}`
+// }
 
 export const encoder = { encoding: 'utf8' }
 
@@ -60,8 +60,8 @@ export function defaultExportToJson(string: string) {
 }
 
 export default {
-	output: out('supaq.ts'),
-	typeTables: out("tables.ts"),
-	schemaTables: out("tables.jsc.ts"),
-	parsedTables: out("tables.parsed.json")
+	output: "supaq.ts",
+	typeTables: "tables.ts",
+	schemaTables: "tables.jsc.ts",
+	parsedTables: "tables.parsed.json"
 } as const

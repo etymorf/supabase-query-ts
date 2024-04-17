@@ -18,7 +18,6 @@ export type SupaValue<Table extends SupaTable, Column extends SupaColumn<Table>>
 export type SupaRow<Table extends SupaTable> =
 	{ [Column in SupaColumn<Table>]: SupaValue<Table, Column>; };
 
-
 ${config.options?.withPrefix ? `
 
 export type SupaColumnPre<Table extends SupaTable> =

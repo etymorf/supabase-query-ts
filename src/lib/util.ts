@@ -32,9 +32,9 @@ export type ConfigOptions = {
 	 */
 	withPrefix?: boolean
 	/**
-	 * how to call the Supabase CLI if not installed globally (is your package manager: pnpm -> "pnpx" ; npm -> "npx")
+	 * if Supabase CLI is installed globally, don't use this option, otherwise put your package manager (pnpm or npm supported now)
 	 */
-	executable?: 'npx' | 'pnpx' | null | ''
+	executable?: 'npm' | 'pnpm' | null | ''
 	/**
 	 * the id column in your tables (defaults to "id")
 	 */
