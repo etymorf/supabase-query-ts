@@ -44,6 +44,10 @@ export type ConfigOptions = {
 	 * if you don't use this option or set it to null, the .delete() method will perform a "hard delete"
 	 */
 	softDelete?: `is_deleted` | null
+	/**
+	 * adds tables.ts and tables.jsc.ts, 2 representations of your tables structure used internally which could be useful
+	 */
+	moreFiles?: boolean
 }
 
 export type Queries<T extends ConfigParams, O extends object = object> = {

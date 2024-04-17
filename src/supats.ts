@@ -16,7 +16,7 @@ const fullPath = process.argv[2] || `./config.ts`
 
 async function getConfig(fullPath: string) {
 	let config: ConfigCommons
-	let { path, command } = await getPath(fullPath)
+	let { path, command } = getPath(fullPath)
 	if (command) {
 		try {
 			// console.log(`command ${command} will be executed`)
@@ -67,6 +67,17 @@ async function gen(config: ConfigCommons & { absoluteDir: string; relativeDir: s
 			const queriesText = SupaGen.queriesText(config.queries)
 			const concat = imports() + outSupa + schemaTablesText + dataTypes + queriesText + bonus(config)
 			fs.writeFileSync(out(path.output), concat)
+
+			// clean 
+			try {
+				fs.unlinkSync(`${getPath(fullPath).path}.js`)
+				if (!config.options.moreFiles) {
+					fs.unlinkSync(out(path.typeTables))
+					fs.unlinkSync(out(path.schemaTables))
+				}
+			} catch (error) {
+				console.error(error)
+			}
 		} catch (error) {
 			console.error(error, errSchema, outSchema)
 		}
@@ -79,6 +90,7 @@ async function gen(config: ConfigCommons & { absoluteDir: string; relativeDir: s
 async function main() {
 	const config = await getConfig(fullPath)
 	if (config) { gen(config) }
+
 }
 
 main()

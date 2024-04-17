@@ -3,7 +3,7 @@ import type { RequiredDeep } from "type-fest"
 const regTs = /(.*)\.ts$/
 const regJs = /(.*)\.js$/
 
-export async function getPath(fullPath: string) {
+export function getPath(fullPath: string) {
 	const matchTs = fullPath.match(regTs)
 	const matchJs = fullPath.match(regJs)
 
