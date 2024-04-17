@@ -120,12 +120,28 @@ Try it!
 
 #### config.options
 
-##### moreFiles
+##### executable: 'npx' | 'pnpx' | null | '' = ''
+
+if Supabase CLI is installed globally, don't use this option, otherwise use your package manager (pnpm or npm supported now)
+
+##### id: null | string = "id"
+
+the id column in your tables (defaults to "id")
+
+##### softDelete: `is_deleted` | null = null
+
+if you input a column name here, the .delete() method will perform a "soft delete" by setting the column to true 
+not currently implemented
+
+##### withPrefix: boolean = false
+
+whether column names are prefixed with table name: tablename_columnname
+
+##### moreFiles: boolean = false
 
 2 more representations of your table structure will be in your folder: 
 - tables.ts
 - tables.jsc.ts
-
 
 #### supaq.ts
 
