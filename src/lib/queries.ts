@@ -62,7 +62,7 @@ export class SupaGen {
 			{
 			${filtered.rel_from.map(([table, version]) => {
 						// console.log("rel_from ----", table, version)
-						return `${table}: Array<keyof ${name}["${table}"]["${version}"]>`
+						return `${table}: Array<${name}["${table}"]["${version}"]>`
 					}).join('\n')}
 			}
 			` : ``

@@ -83,7 +83,7 @@ export class SupaQ {
 		let query = client.from(table).select(queries[table][version].text)
 		if (filter) {
 			Object.entries(filter).forEach(([column, filters]) => {
-				Object.entries(filter).forEach(([operator, value]) => {
+				Object.entries(filters).forEach(([operator, value]) => {
 				query = query.filter(column, operator, value)
 				})
 			})
@@ -197,7 +197,7 @@ function suparse<T extends keyof SupaQueries, V extends keyof SupaQueries[T]>(
   }
 ) {
   const { table, version } = params
-  let result: any = { ...toParse }
+  const result: any = { ...toParse }
   Object.entries(toParse).forEach(([column, value]) => {
     if (Array.isArray(value)) {
       result[column] = value.map(v => {
