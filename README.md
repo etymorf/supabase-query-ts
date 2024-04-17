@@ -1,19 +1,22 @@
-**WARNING: CURRENTLY A BETA.**
+**A replacement for supabase-js and supabase CLI for database operations**.
 
-The official package supabase-js gives you the power to communicate, securely and easily, from the client to the database.
-But it does not provide the DX you deserve :
-- strongly typed select operations : never make a spelling mistake or misplace a comma again
+The DX you deserve :
+- strongly typed select operations : 
+  never misplace a comma again
 - types on { data }
-- easily accessible types, rather than `Database["public"]["Tables"]`... : SupaQ's type generator built on top of `supabase gen queries` simplifies the process. Say hi to `SupaTable`, `SupaColumn<T>`, `SupaValue<T, C>`, `SupaRow<T>`
-- a way to update the value of an entry from { data } directly : simply write `await data[0].update({name: "John"})` rather than traditional untyped `await supabase.from('users').update({name: "John"}).eq({id: 12})`
+- accessible helper types, to replace `Database["public"]["Tables"]`... : 
+  `SupaTable`, `SupaColumn<T>`, `SupaValue<T, C>`, `SupaRow<T>`...
+- the value of an entry can be updated from { data } directly :
+   write `await data[0].update({name: "John"})` 
+   rather than traditional untyped `await supabase.from('users').update({name: "John"}).eq({id: 12})`
+- full control :
+  access to `type Database`, `client` and everything you need from `supabase-js` 
 
-## Supabase Query Typescript, a.k.a. SupaQ : the strongly typed querier for your Supa database
+# Supabase Query Typescript, a.k.a. SupaQ : the strongly typed querier for your Supa database
 
-Use this package as a drop-in **replacement for supabase-js and supabase CLI for database operations**.
+## How to?
 
-### How to?
-
-#### Create a config.ts file
+### Create a config.ts file
 
 Name it as you prefer. Place it where you prefer. This is your file.
 
@@ -22,8 +25,8 @@ All you need to start:
 ```
 const config = {
 	supabase: {
-		key: environment.SUPABASE_ANON_KEY,
-		projectId: environment.SUPABASE_PROJECT_ID
+		key: SUPABASE_ANON_KEY,
+		projectId: SUPABASE_PROJECT_ID
 	}
 }
 export default config
@@ -37,8 +40,8 @@ import type { ConfigCommons as Config } from 'supabase-query-ts'
 
 const config = {
 	supabase: {
-		key: environment.SUPABASE_ANON_KEY,
-		projectId: environment.SUPABASE_PROJECT_ID
+		key: SUPABASE_ANON_KEY,
+		projectId: SUPABASE_PROJECT_ID
 	},
 	options: {
 		executable: `pnpx`
@@ -51,7 +54,7 @@ export default config
 ``` 
 
 The config is split into 3 parts:
-- supabase: equivalent (but incomplete for now) to Supabase CLI arguments after `supabase gen types typescript `
+- supabase: equivalent (but incomplete for now) to Supabase CLI arguments
 - options
 - queries: all your queries will be centralized here
 
@@ -71,7 +74,7 @@ Before starting writing queries, run SupaQ for the first time.
 pnpm supaq ./relative/path/to/your/config/file.ts
 ```
 
-It generated a file called `supaq.ts`. 
+It generated a file called `supaq.ts`. Everytime you change the config or your schema, you want to run SupaQ again.
 
 Now, go back to your config file. Replace the type import to get auto-completion and type safety.
 
@@ -147,7 +150,7 @@ SupaQ exports helpers types. For auto-completion plus type safety of all DB rela
 
 Note: Those helper types focus on providing quick access to table types. If you need access to other types such as functions, use `type Database`.
 
-###### suparse : the parser
+##### suparse : the parser
 
 - Adds CRUD operations directly to the row :
 	- ```.set(column, value)```
@@ -160,3 +163,31 @@ An object deeply passed down into components got metadata of the table where it 
 `const name = data[0].name // type string` -> get a typed value
 `await data[1].set('age', '18') // type error : age is a number` -> update the row
 `await data[2].delete()` -> delete the row (in the config you can opt-in for soft deletion)
+
+
+## The rest
+
+Get access to the generated Supabase client :
+
+```
+import { client } from './supaq'
+import type { SignInWithPasswordCredentials } from '@supabase/supabase-js'
+
+async function signIn(credentials: SignInWithPasswordCredentials) {
+	await client.auth.signInWithPassword(credentials)
+	...
+}
+```
+
+Get the `Database` type and helper types :
+
+```
+import type { Database, DB, SupaTable, SupaRow, SupaValue } from './supaq'
+
+type MyFunction = Database["public"]["Functions"]["myFunction"]
+type UserInsert = DB["user"]["Insert"]
+
+...
+
+```
+
