@@ -146,12 +146,11 @@ whether column names are prefixed with table name: tablename_columnname
 #### supaq.ts
 
 It delivers you:
+- the Supabase `client`
 - the complete output from `supabase gen types typescript`
-- the SupaQ class with the .select() and .insert() methods
+- the `SupaQ` class with the `.select()` and `.insert()` methods
 - helper types
-- the parser: used internally in SupaQ.select()
-
-
+- the parser: used internally in `SupaQ.select()`
 
 ##### SupaQ class
 
