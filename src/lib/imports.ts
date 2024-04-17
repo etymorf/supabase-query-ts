@@ -7,7 +7,6 @@ import { PostgrestFilterBuilder, PostgrestSingleResponse } from '@supabase/postg
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
 
 // from SupaQ
-// import type { Parsed } from '${dots}/suparse';
-import type { ConfigCommons } from '${dots}/util';
+import type { ConfigCommons, StringQueries } from '${dots}/util';
 
 `

@@ -46,16 +46,13 @@ async function gen(config: ConfigCommons) {
 
 			const schemaTables = parseSchema(defaultExportToJson(fs.readFileSync(path.schemaTables, encoder)))
 			const schemaTablesText = `
-			
 			const schemaTables = ${JSON.stringify(schemaTables)} as const
 			
 			`
 			const dataTypes = SupaGen.dataTypes(config.queries, schemaTables)
-			const queriesText = `
-			const queries: {[T in keyof SupaQueries]: {[V in keyof SupaQueries[T]]: string}} = ${JSON.stringify(SupaGen.queriesText(config.queries))}
-			`
+			const queriesText = SupaGen.queriesText(config.queries)
 			const concat = imports() + outSupa + schemaTablesText + dataTypes + queriesText + bonus(config)
-			fs.writeFileSync(path.output, concat);
+			fs.writeFileSync(path.output, concat)
 		}
 	}
 }

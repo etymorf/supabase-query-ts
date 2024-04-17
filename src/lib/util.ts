@@ -1,3 +1,4 @@
+import { Primitive } from "type-fest"
 import { Includes } from "./queries"
 
 type Context = {
@@ -23,22 +24,39 @@ export type ConfigSupabase = {
 		{ dbUrl: string } | { projectId: string }
 	)
 
+
 export type ConfigOptions = {
+	/**
+	 * whether column names are prefixed with table name: tablename_columnname
+	 * (defaults to false)
+	 */
 	withPrefix?: boolean
+	/**
+	 * how to call the Supabase CLI if not installed globally (is your package manager: pnpm -> "pnpx" ; npm -> "npx")
+	 */
 	executable?: 'npx' | 'pnpx' | null | ''
-	id?: 'id' | null | string
+	/**
+	 * the id column in your tables (defaults to "id")
+	 */
+	id?: "id" | null | string
+	/**
+	 * if you input a column name here, the .delete() method will perform a "soft delete" by setting the column to true ;
+	 * if you don't use this option or set it to null, the .delete() method will perform a "hard delete"
+	 */
+	softDelete?: `is_deleted` | null
 }
 
-type Queries<T extends ConfigParams | string> = {
-	[table: string]: {
-		[version: string]: T
+export type Queries<T extends ConfigParams, O extends object = object> = {
+	[Table in keyof O]: {
+		[Version in keyof O[Table]]: T
 	}
 }
-export type ConfigQueries = Queries<ConfigParams>
-export type StringQueries = Queries<string>
+
+export type ConfigQueries<O extends object = object> = Queries<ConfigParams, O>
+export type StringQueries<O extends object = object> = Queries<ConfigParams & { text: string }, O>
 
 export type ConfigParams = {
-	columns: Array<string> | string // string is allowed as a comma separated list of columns
+	columns: Array<string>
 	includes?: Includes
 }
 

@@ -10,15 +10,17 @@
     "typescript": "^5.3.3"
   },
   "type": "module",
-  "name": "supa-q-base-ts",
+  "name": "supabase-query-ts",
   "license": "MIT",
-  "description": "supa-Q-base provides type safety to all Queries made with supabase-js",
+  "description": "Supabase Query TypeScript, a.k.a. SupaQ, provides type safety to all queries made with supabase-js",
   "scripts": {
     "build": "tsup index.ts --format cjs,esm --dts",
     "release": "pnpm run build && changeset publish",
-    "tsc": "cd src/supaq/lib && tsc --target es2022",
-    "supats": "tsc && cd src/supaq && node supats.js",
-    "test-gen": "cd src/supaq/lib && tsc jsc.ts --target es2022 --module es2022 --moduleResolution node --skipLibCheck && node tests.js " 
+    "supats": "tsc && cd src && node supats.js",
+    "test-gen": "cd src/lib && tsc jsc.ts --target es2022 --module es2022 --moduleResolution node --skipLibCheck && node tests.js "
+  },
+  "bin": {
+    "supaq": "dist/supats.js"
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -31,6 +33,7 @@
     "recast": "^0.23.5",
     "safe-json-stringify": "^1.2.0",
     "ts-morph": "^21.0.1",
+    "tsc": "^2.0.4",
     "typescript-json-schema": "^0.63.0"
   }
 }
