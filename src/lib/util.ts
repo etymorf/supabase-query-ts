@@ -1,5 +1,6 @@
-import { Primitive } from "type-fest"
+// import { Primitive } from "type-fest"
 import { Includes } from "./queries"
+import { SupabaseClientOptions } from "@supabase/supabase-js"
 
 type Context = {
 	[option: string]: any
@@ -16,13 +17,15 @@ export function pre(t: string, context?: Context): string {
 	}
 }
 
-export type ConfigSupabase = {
-	key: string
-	local?: boolean
-	linked?: boolean
-} & (
-		{ dbUrl: string } | { projectId: string }
-	)
+export type ConfigSupabase =
+	{
+		key: string
+		local?: boolean
+		linked?: boolean
+		clientOptions?: SupabaseClientOptions<"public" | undefined>
+	}
+	&
+	({ dbUrl: string } | { projectId: string })
 
 
 export type ConfigOptions = {

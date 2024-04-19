@@ -260,7 +260,7 @@ export default (config: ConfigCommons) => `
 
 // --SupaQ--
 
-export const client: SupabaseClient = createClient<Database>("${'dbUrl' in config.supabase ? config.supabase.dbUrl : `https://${config.supabase.projectId}.supabase.co`}", "${config.supabase.key}");
+export const client: SupabaseClient = createClient<Database>("${'dbUrl' in config.supabase ? config.supabase.dbUrl : `https://${config.supabase.projectId}.supabase.co`}", "${config.supabase.key}"${'clientOptions' in config.supabase ? `, ${JSON.stringify(config.supabase.clientOptions)}` : ''});
 
 // helper types --
 
