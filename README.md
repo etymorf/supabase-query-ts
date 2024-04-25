@@ -38,7 +38,7 @@ If you haven't installed globally the Supabase CLI, you need to specify an "exec
 // you can optionally import this helper type to get an idea of the different options
 import type { ConfigCommons as Config } from 'supabase-query-ts'
 
-const config = {
+const config: Config = {
 	supabase: {
 		key: SUPABASE_ANON_KEY,
 		projectId: SUPABASE_PROJECT_ID
@@ -177,13 +177,16 @@ Note: Those helper types focus on providing quick access to table types. If you 
 - Adds CRUD operations directly to the row :
 	- ```.set(column, value)```
 	- ```.delete()```
-- Recursively dds the private fields `__table` and `__version` 
+- Recursively adds the private fields `__table` and `__version` 
 
 An object deeply passed down into components got metadata of the table where it comes, plus a way to interact directly with the database.
 
 `const data = await SupaQ.select("users", "extended", { "is_pro": true })`
+
 `const name = data[0].name // type string` -> get a typed value
+
 `await data[1].set('age', '18') // type error : age is a number` -> update the row
+
 `await data[2].delete()` -> delete the row (in the config you can opt-in for soft deletion)
 
 
