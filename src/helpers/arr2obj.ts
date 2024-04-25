@@ -7,7 +7,6 @@ export const arr2obj = <T = any>(array: Array<any>, options?: Options<T>): { [id
 	if (!(Array.isArray(array) && array.length !== 0)) {
 		return {};
 	}
-
 	return array.reduce((obj, item) => {
 		const key = options?.key || 'id';
 		if (key) {

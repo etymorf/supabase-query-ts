@@ -3,11 +3,9 @@ import { ConfigCommons, pre } from "./util.js";
 const builder = (config: ConfigCommons) => {
 	return {
 		types: `
-
-// SupaQ helper types
-
 export type DB = Database['public']['Tables'];
 export type SupaTable = keyof DB;
+export type DBTable<Table extends SupaTable> = DB[Table]["Update"]
 
 export type SupaColumn<Table extends SupaTable> =
 	keyof DB[Table]['Row'];
@@ -38,6 +36,8 @@ type Filter<T extends SupaTable> = {
   [column in ${pre('SupaColumn')}<T>]?: {
     [operator in keyof PostgrestFilterBuilder<Database["public"], SupaRow<T>, any>]?: ${pre('SupaValue')}<T, column>
   }
+} & {
+  limit?: number
 }
 
 type SchemaTables = typeof schemaTables
@@ -83,22 +83,34 @@ export class SupaQ {
 		let query = client.from(table).select(queries[table][version].text)
 		if (filter) {
 			Object.entries(filter).forEach(([column, filters]) => {
-				Object.entries(filters).forEach(([operator, value]) => {
-				query = query.filter(column, operator, value)
-				})
+				if (typeof filters === 'number') {
+					if (column === "limit") {
+						query.limit(filters)
+					}
+				} else {
+					Object.entries(filters).forEach(([operator, value]) => {
+						query = query.filter(column, operator, value)
+					})
+				}
 			})
 		}
 		const result = await query
 		const data = result.data as Array<SupaQueries[T][V]>
 		const parsed = suparrse(data, { table, version })
-		return parsed
+		return { data: parsed, error: result.error }
+	}
+	static async rpc<F extends keyof Database["public"]["Functions"]>(f: F, args: Database["public"]["Functions"][F]["Args"]) {
+		const result = await client.rpc(f, args)
+		const data = result.data as Database["public"]["Functions"][F]["Returns"]
+		const error = result.error
+		return { data, error}
 	}
 }
 		`,
 		config: `
 		type Query<Table extends SupaTable> = {
 			columns: Array<SupaColumn<Table>>
-			includes: Includes<Table>
+			includes?: Includes<Table>
 		}
 		export type Config = {
 			queries: {

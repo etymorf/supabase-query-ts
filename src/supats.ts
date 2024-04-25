@@ -14,6 +14,30 @@ import { parseSchema } from './lib/jsc.js'
 // program.option("-c, --config <file>", "relative path to SupaQ config file: -c ./supaconfig.ts or ./config ...")
 const fullPath = process.argv[2] || `./config.ts`
 
+type Config = ConfigCommons & { absoluteDir: string; relativeDir: string }
+
+function out(config: Config, incompletePath: string) {
+	return `${config.relativeDir}/${incompletePath}`
+	// return `file:///${config.absoluteDir}\\${incompletePath}`
+}
+
+function clean(config: Config) {
+	try {
+		fs.unlinkSync(`${getPath(fullPath).path}.js`)
+		if (!config.options.moreFiles) {
+			fs.unlinkSync(out(config, path.typeTables))
+			fs.unlinkSync(out(config, path.schemaTables))
+		}
+		try {
+			fs.unlinkSync(out(config, "supaq.js"))
+		} catch (error) {
+			// console.error(error)
+		}
+	} catch (error) {
+		// console.error(error)
+	}
+}
+
 async function getConfig(fullPath: string) {
 	let config: ConfigCommons
 	let { path, command } = getPath(fullPath)
@@ -44,45 +68,39 @@ async function getConfig(fullPath: string) {
 		return { ...config, options, absoluteDir, relativeDir }
 	} catch (error) {
 		console.error(error)
+		try { fs.unlinkSync(`${getPath(fullPath).path}.js`) } catch (error) { console.error(error) }
 	}
 }
 
-async function gen(config: ConfigCommons & { absoluteDir: string; relativeDir: string }) {
-	function out(incompletePath: string) {
-		return `${config.relativeDir}/${incompletePath}`
-		// return `file:///${config.absoluteDir}\\${incompletePath}`
-	}
+async function gen(config: Config) {
+
 	const commandSupa = getCommandSupa(config)
 	const { stdout: outSupa, stderr: errSupa } = await exec(commandSupa)
 	try {
-		fs.writeFileSync(out(path.typeTables), justTables(outSupa), encoder)
-		const { stdout: outSchema, stderr: errSchema } = await exec(`${config.options.executable} ts-generate-schema ${out(path.typeTables)} --out .`)
+		fs.writeFileSync(out(config, path.typeTables), justTables(outSupa), encoder)
+		const { stdout: outSchema, stderr: errSchema } = await exec(`${config.options.executable} ts-generate-schema ${out(config, path.typeTables)} --out .`)
 		try {
-			const schemaTables = parseSchema(defaultExportToJson(fs.readFileSync(out(path.schemaTables), encoder)))
-			const schemaTablesText = `
-			const schemaTables = ${JSON.stringify(schemaTables)} as const
-			
-			`
-			const dataTypes = SupaGen.dataTypes(config.queries, schemaTables)
-			const queriesText = SupaGen.queriesText(config.queries)
-			const concat = imports() + outSupa + schemaTablesText + dataTypes + queriesText + bonus(config)
-			fs.writeFileSync(out(path.output), concat)
-
-			// clean 
+			const schemaTables = parseSchema(defaultExportToJson(fs.readFileSync(out(config, path.schemaTables), encoder)))
 			try {
-				fs.unlinkSync(`${getPath(fullPath).path}.js`)
-				if (!config.options.moreFiles) {
-					fs.unlinkSync(out(path.typeTables))
-					fs.unlinkSync(out(path.schemaTables))
-				}
+				const schemaTablesText = `
+			const schemaTables = ${JSON.stringify(schemaTables)} as const
+			`
+				const dataTypes = SupaGen.dataTypes(config.queries, schemaTables)
+				const queriesText = SupaGen.queriesText(config.queries)
+				const concat = imports() + outSupa + schemaTablesText + dataTypes + queriesText + bonus(config)
+				fs.writeFileSync(out(config, path.output), concat)
 			} catch (error) {
-				console.error(error)
+				console.error(error, errSchema, outSchema)
+				clean(config)
 			}
 		} catch (error) {
 			console.error(error, errSchema, outSchema)
+			clean(config)
 		}
+		clean(config)
 	} catch (error) {
 		console.error(error, errSupa)
+		clean(config)
 	}
 
 }

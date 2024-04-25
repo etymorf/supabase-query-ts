@@ -1,5 +1,5 @@
 import type { ParsedSchema } from "./jsc";
-import type { ConfigQueries, StringQueries } from "./util";
+import type { ConfigParams, ConfigQueries, StringQueries } from "./util";
 
 export type Includes = { [table: string]: string }
 
@@ -9,7 +9,7 @@ export class SupaGen {
 		Object.entries(queries).forEach(([table, versions]) => {
 			Object.entries(versions).forEach(([version, query]) => {
 				// @ts-ignore
-				object = { ...object, [table]: { ...object[table] || {}, [version]: { ...query, text: queryText(queries, query) } } }
+				object = { ...object, [table]: { ...object[table] || {}, [version]: { ...query, text: queryText(queries, table, version) } } }
 			})
 		})
 		const text = `const queries: StringQueries<SupaQueries> = ${JSON.stringify(object)}`
@@ -17,14 +17,14 @@ export class SupaGen {
 	}
 	static dataTypes(queries: ConfigQueries, schema: ParsedSchema, exportDefault = false) {
 		const name = `SupaQueries`
-		let text = `type ${name} = {
+		let text = `export type ${name} = {
 		`
 		Object.entries(schema).forEach(([table, { columns, rel_to, rel_from }]) => {
 			// if (table === "lex_def") console.log(columns)
 			if (table in queries) {
 				text += `${table}: {
 			`
-			// @ts-ignore
+				// @ts-ignore
 				Object.entries(queries[table]).forEach(([version, params]) => {
 					// console.log("one iteration of queries[table] loop", table, version)
 					const filtered = {
@@ -87,14 +87,21 @@ export class SupaGen {
 		return text
 	}
 }
-// @ts-ignore
-function queryText(queries: ConfigQueries, params: ConfigQueries[string][string]) {
-	const { columns, includes } = params
+
+function queryText<CQ extends ConfigQueries, KCQ extends keyof CQ = keyof CQ>(queries: CQ, table: KCQ, version: keyof CQ[KCQ], exclude: string[] = []) {
+	if (typeof table === 'string') {
+		if (!(exclude.length)) {
+			exclude = [table]
+		} else {
+			exclude = [...exclude, table]
+		}
+	}
+	const { columns, includes } = queries[table][version] as ConfigParams
 	let result = ``
-	const included = Object.entries(includes || {})
+	const included = Object.entries(includes || {}).filter(([t]) => (!(exclude?.includes(t))))
 	result += Array.isArray(columns) ? columns.join(', ') : columns
 	// @ts-ignore
-	const mapper = ([t, v]: [t: string, v: string]) => `${t}(${queryText(queries, queries[t][v])})`
+	const mapper = ([t, v]: [t: string, v: string]) => `${t}(${queryText(queries, t, v, exclude)})`
 	// @ts-ignore
 	if (included.length) { result += `, ${included.map(mapper).join(`,`)}` }
 	return result
