@@ -1,5 +1,18 @@
 import { ConfigCommons, pre } from "./util.js";
 
+const columnsForInsertIfPrefix = `
+	arr2obj(
+		Object.entries(changes).map((p) => {
+			const [key, value] = p;
+			if (key.match('_id')) {
+				return p;
+			} else {
+				return [\`\${ table }_\${ key } \`, value];
+			}
+		})
+	);
+`
+
 const builder = (config: ConfigCommons) => {
 	return {
 		types: `
@@ -57,27 +70,29 @@ export class SupaQ {
 			}
 		}
 	` : ``}
-	static async insert<Table extends SupaTable>(
-		table: Table,
-		changes: { 
-			[C in ${pre('SupaColumn', config.options)}<Table>]: SupaValue<Table, C>
+	static async insertAndSelect<T extends keyof SupaQueries, V extends keyof SupaQueries[T]>(
+		table: T,
+		changes: {
+			[C in ${pre('SupaColumn', config.options)}<T>]?: SupaValue<T, C>
+		},
+		version: V
+	) {
+		const payload = ${config.options?.withPrefix ? columnsForInsertIfPrefix : `changes`}
+		const columns = queries[table][version].text
+		const result = await client.from(table).insert(payload).select(columns);
+		const data = result.data as Array<SupaQueries[T][V]>
+		const parsed = suparrse(data, { table, version })
+		return { data: parsed, error: result.error }
+	}
+	 static async insert<T extends SupaTable>(
+		table: T,
+		changes: {
+		[C in SupaColumn<T>]?: SupaValue<T, C>
 		}
 	) {
-		const payload = ${config.options?.withPrefix ? `
-			arr2obj(
-				Object.entries(changes).map((p) => {
-					const [key, value] = p;
-					if (key.match('_id')) {
-						return p;
-					} else {
-						return [\`\${ table }_\${ key } \`, value];
-					}
-				})
-			);
-		`: `changes`}  
-		const { data, error } = await client.from(table).insert(payload);
-		// console.log(\`insert in \${ String(table) } \`, data, error);
-		return { data, error };
+		const payload = ${config.options?.withPrefix ? columnsForInsertIfPrefix : `changes`}
+		const { error } = await client.from(table).insert(payload);
+		return { error }
 	}
 	static async select<T extends keyof SupaQueries, V extends keyof SupaQueries[T]>(table: T, version: V, filter?: Filter<T>) {
 		let query = client.from(table).select(queries[table][version].text)
@@ -234,7 +249,7 @@ function suparse<T extends keyof SupaQueries, V extends keyof SupaQueries[T]>(
     ...result2,
     __table: table,
     __version: version,
-    async set<C extends keyof SupaQueries[typeof table][typeof version]>(column: C, value: SupaQueries[typeof table][typeof version][C]) {
+    async set<C extends SupaColumn<typeof table>>(column: C, value: SupaValue<typeof table, C>) {
       // column is sometimes table + column 
       const result = await client.from(table).update({ [column]: value }).eq(String(idProperty), id).select(\`\${ String(idProperty) }, \${ String(column) } \`)
       return result

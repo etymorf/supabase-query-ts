@@ -88,3 +88,4 @@ export function justTables(outSupa: string) {
 	})
 	return text
 }
+
