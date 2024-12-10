@@ -53,7 +53,7 @@ export function getCommandSupa(config: ConfigCommons) {
 // 	return `${dir}/${text}`
 // }
 
-export const encoder = { encoding: 'utf8' }
+export const encoder = { encoding: 'utf8' } as const
 
 export function defaultExportToJson(string: string) {
 	return JSON.parse(string.replace("export default ", ""))

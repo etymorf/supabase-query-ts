@@ -133,6 +133,9 @@ export class SupaQ {
 					[Version: string]: Query<Table>
 				}
 			}
+			enums: {
+				[Name: string]: { [Table in SupaTable]?: SupaColumn<Table> }
+			}
 		} & ConfigCommons
 		`,
 		suparse_old: `
@@ -162,13 +165,13 @@ function suparse<Table extends keyof SupaQueries, O extends SupaQueries[Table][V
 				result[column] = value.map(v => {
 					if (typeof v === 'object') {
 						return suparse(String(column) as SupaTable, v) as Parsed<typeof column extends SupaTable ? typeof column : SupaTable, typeof v>
-					} else {
-						return v
-					}
+					} 
+					return v	
 				})
 			} else if (typeof value === 'object') {
 				// @ts-ignore
-				result[column] = suparse(String(column) as SupaTable, value)
+				const p = suparse(String(column) as SupaTable, value)
+				if (p) { result[column] = p }
 			} else {
 				result[column] = value
 			}
@@ -216,6 +219,7 @@ function suparrse<Table extends SupaTable, O extends object>(table: Table, arr: 
 		`,
 		suparse: `
 		
+type DeleteOptions = { hard?: boolean }
 function suparse<T extends keyof SupaQueries, V extends keyof SupaQueries[T]>(
   toParse: any,
   params: {
@@ -223,51 +227,63 @@ function suparse<T extends keyof SupaQueries, V extends keyof SupaQueries[T]>(
     version: V
   }
 ) {
-  const { table, version } = params
-  const result: any = { ...toParse }
-  Object.entries(toParse).forEach(([column, value]) => {
-    if (Array.isArray(value)) {
-      result[column] = value.map(v => {
-        if (typeof v === 'object' && column in (queries[table][version].includes || {})) {
-          // @ts-ignore
-          return suparse(v, { table: column, version: queries[table][version].includes[column] })
-        } else {
-          return v
-        }
-      })
-    } else if (typeof value === 'object') {
-      // @ts-ignore
-      result[column] = suparse(value, { table: column, version: queries[table][version][column] })
-    } else {
-      result[column] = value
-    }
-  })
-  const idProperty = "id"
-  const id = result[idProperty]
-  const result2 = { ...result } as SupaQueries[T][V]
-  const result3 = {
-    ...result2,
-    __table: table,
-    __version: version,
-    async set<C extends SupaColumn<typeof table>>(column: C, value: SupaValue<typeof table, C>) {
-      // column is sometimes table + column 
-      const result = await client.from(table).update({ [column]: value }).eq(String(idProperty), id).select(\`\${ String(idProperty) }, \${ String(column) } \`)
-      return result
-    },
-    async delete(options?: { hard?: boolean }) {
-      const isHard = options?.hard
-      let result
-      if (isHard) {
-        result = await client.from(table).delete().eq(String(idProperty), id).select(String(idProperty))
-      } else {
-        const is_deleted = \`is_deleted\`
-        // @ts-ignore
-        result = await this.set(is_deleted, true)
-      }
-      return result
-    }
-  }
-  return result3
+	const { table, version } = params
+	if (typeof toParse === 'object') {
+		const result: any = { ...toParse }
+		const e = Object.entries(result)
+		e.forEach(([column, value]) => {
+			if (Array.isArray(value)) {
+			result[column] = value.map(v => {
+				if (v) {
+					if (typeof v === 'object' && column in (queries[table][version].includes || {})) {
+					// @ts-ignore
+					const p = suparse(v, { table: column, version: queries[table][version].includes[column] })
+					if (p) { return p }
+					} 
+					return v
+				}
+			})
+			} else if (typeof value === 'object') {
+			// @ts-ignore
+			result[column] = suparse(value, { table: column, version: queries[table][version][column] })
+			} else {
+			result[column] = value
+			}
+		})
+		if (result && Object.entries(result).length) {
+			const idProperty = "id"
+			const id = result[idProperty]
+			const result2 = { ...result } as SupaQueries[T][V]
+			const result3 = {
+				...result2,
+				__table: table,
+				__version: version,
+				async set<C extends SupaColumn<typeof table>>(column: C, value: SupaValue<typeof table, C>) {
+				// column is sometimes table + column 
+				const result = await client.from(table).update({ [column]: value }).eq(String(idProperty), id).select(\`\${ String(idProperty) }, \${ String(column) } \`)
+				return result
+				},
+				async delete(options?: DeleteOptions) {
+				const isHard = options?.hard
+				let result
+				if (isHard) {
+					result = await client.from(table).delete().eq(String(idProperty), id).select(String(idProperty))
+				} else {
+					const is_deleted = \`is_deleted\`
+					// @ts-ignore
+					result = await this.set(is_deleted, true)
+				}
+				return result
+				}
+			}
+			return result3 as SupaQueries[T][V] & {
+				__table: T
+				__version: V
+				set: <C extends SupaColumn<typeof table>>(column: C, value: SupaValue<T, C>) => Promise<{ [idProperty]: string | number } & { [Col in C]: string }>
+				delete: (options?: DeleteOptions) => Promise<any>
+			}		
+		}
+	}
 }
 
 function suparrse<T extends keyof SupaQueries, V extends keyof SupaQueries[T]>(
@@ -277,7 +293,7 @@ function suparrse<T extends keyof SupaQueries, V extends keyof SupaQueries[T]>(
     version: V
   }
 ) {
-  return toParse.map(o => (suparse(o, params)))
+  return toParse?.map(o => (suparse(o, params))).filter(o => !!o) || []
 }
 		`
 	}

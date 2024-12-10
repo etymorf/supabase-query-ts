@@ -1,6 +1,6 @@
 {
   "name": "supabase-query-ts",
-  "description": "Supabase Query TypeScript, a.k.a. SupaQ, provides type safety to all queries made with supabase-js",
+  "description": "SupaQ TS provides type safety to DB queries with Supabase",
   "version": "0.0.3",
   "type": "module",
   "license": "MIT",

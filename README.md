@@ -1,64 +1,52 @@
-**A replacement for supabase-js and supabase CLI for database operations**.
+**Type-safe replacement for supabase-js and cli for database operations**.
 
 The DX you deserve :
-- strongly typed select operations : 
-  never misplace a comma again
-- types on { data }
-- accessible helper types, to replace `Database["public"]["Tables"]`... : 
-  `SupaTable`, `SupaColumn<T>`, `SupaValue<T, C>`, `SupaRow<T>`...
-- the value of an entry can be updated from { data } directly :
+- strongly typed select operation and result { data }
+- update database from { data } directly :
    write `await data[0].update({name: "John"})` 
    rather than traditional untyped `await supabase.from('users').update({name: "John"}).eq({id: 12})`
+
+- helper types to replace `Database["public"]["Tables"]`... : 
+  `SupaTable`, `SupaColumn<T>`, `SupaValue<T, C>`, `SupaRow<T>`...
 - full control :
   access to `type Database`, `client` and everything you need from `supabase-js` 
 
-# Supabase Query Typescript, a.k.a. SupaQ : the strongly typed querier for your Supa database
+## SupaQ TS : the strongly typed Querier for your Supabase database
 
-## How to?
+### How to?
 
-### Create a config.ts file
+#### Create a config.ts file
 
-Name it as you prefer. Place it where you prefer. This is your file.
+Name it as you prefer. Place it where you prefer. 
+It's the only file you'll ever need.
 
-All you need to start:
-
-```
-const config = {
-	supabase: {
-		key: SUPABASE_ANON_KEY,
-		projectId: SUPABASE_PROJECT_ID
-	}
-}
-export default config
-```
-
-If you haven't installed globally the Supabase CLI, you need to specify an "executable" like npx or pnpx to run it: 
+Please install the Supabase CLI globally, ```supabase login```, etc.
 
 ```
-// you can optionally import this helper type to get an idea of the different options
 import type { ConfigCommons as Config } from 'supabase-query-ts'
-
-const config: Config = {
+const config = {
 	supabase: {
 		key: SUPABASE_ANON_KEY,
 		projectId: SUPABASE_PROJECT_ID
 	},
 	options: {
-		executable: `pnpx`
+		// executable: `pnpx` // if you haven't installed the Supabase CLI globally you need to specify here an executable like npx or pnpx (not recommended, may not work)
 	},
-	queries: {
-
-	}
-}
+	queries: { },
+	overrides: { },
+	enums: { }
+} as const satisfies Config
 export default config
-``` 
+```
 
-The config is split into 3 parts:
-- supabase: equivalent (but incomplete for now) to Supabase CLI arguments
+The config got:
+- supabase: equivalent (yet incomplete) to Supabase CLI arguments
 - options
 - queries: all your queries will be centralized here
+- overrides
+- enums: automatic download from your tables, gen enum types with a specific text column, auto-refresh
 
-#### config.queries
+##### queries
 
 Before starting writing queries, run SupaQ for the first time.
 
@@ -66,15 +54,17 @@ Before starting writing queries, run SupaQ for the first time.
 pnpm supaq ./relative/path/to/your/config/file.ts
 ```
 
-It generated a file called `supaq.ts`. Everytime you change the config or your schema, you want to run SupaQ again.
+The path of the config is relative to the root of your project and must include the .ts extension.
+It generated a file called `supaq.ts`. 
+When satisfied with changes to the config or your schema, run SupaQ again.
 
-Now, go back to your config file. Replace the type import to get auto-completion and type safety.
+Back to your config file : replace the type Config import to get auto-completion and type safety.
 
 ```
 // import type { ConfigCommons as Config } from 'supabase-query-ts'
 import type { Config } from './supaq.ts'
 
-const config: Config = {
+const config = {
 	...,
 	queries: {
 		"user": {
@@ -92,7 +82,7 @@ const config: Config = {
 			}
 		}
 	}
-}
+} as const satisfies Config
 ``` 
 
 Here, you saw an example of how to write queries. It may look intimidating, so look at the type you just imported:
@@ -112,38 +102,38 @@ export type Config = {
 
 Includes is an object that says that you want to include a subquery:
 `{ [table]: version }`
-So `includes: { "user": "short" }` means "include the short query for the table 'user'". In this case, it will include only the column 'name'.
+So `includes: { "user": "short" }` means "when doing the 'classic' query on table 'purchase', include the 'short' query of table 'user'". In this case, it will include only the column 'name'.
 
-Each table can have multiple versions of queries. Each version selects columns and subqueries.
+Each table can have unlimited queries. Each query selects columns and includes subqueries.
 
 Try it!
 
-#### config.options
+##### options
 
-##### executable: 'npx' | 'pnpx' | null | '' = ''
+###### executable: 'npx' | 'pnpx' | null | '' = ''
 
 if Supabase CLI is installed globally, don't use this option, otherwise use your package manager (pnpm or npm supported now)
 
-##### id: null | string = "id"
+###### id: null | string = "id"
 
 the id column in your tables (defaults to "id")
 
-##### softDelete: `is_deleted` | null = null
+###### softDelete: `is_deleted` | null = null
 
-if you input a column name here, the .delete() method will perform a "soft delete" by setting the column to true 
-not currently implemented
+if you input a column name here, the .delete() method will perform a "soft delete" on rows by setting this column to true rathen than dropping the row 
+*not currently implemented*
 
-##### withPrefix: boolean = false
+###### withPrefix: boolean = false
 
 whether column names are prefixed with table name: tablename_columnname
 
-##### moreFiles: boolean = false
+###### moreFiles: boolean = false
 
-2 more representations of your table structure will be in your folder: 
+in addition to SupaQ, you'll have 2 more representations of your table structure in your folder: 
 - tables.ts
 - tables.jsc.ts
 
-#### supaq.ts
+##### supaq.ts
 
 It delivers you:
 - the Supabase `client`
@@ -152,15 +142,15 @@ It delivers you:
 - helper types
 - the parser: used internally in `SupaQ.select()`
 
-##### SupaQ class
+###### SupaQ class
 
 The SupaQ class provides methods for building queries and query your database.
 
 - ```async SupaQ.insert()``` : inserting a row from the client-side has never been so type-safe
 
-- ```async SupaQ.select()``` : selecting rows
+- ```async SupaQ.select()``` : select rows using queries defined in config, optionally add filters
 
-##### helper types
+###### helper types
 
 SupaQ exports helpers types. For auto-completion plus type safety of all DB related operations.
 
@@ -172,7 +162,7 @@ SupaQ exports helpers types. For auto-completion plus type safety of all DB rela
 
 Note: Those helper types focus on providing quick access to table types. If you need access to other types such as functions, use `type Database`.
 
-##### suparse : the parser
+###### suparse : the parser
 
 - Adds CRUD operations directly to the row :
 	- ```.set(column, value)```
@@ -182,16 +172,20 @@ Note: Those helper types focus on providing quick access to table types. If you 
 An object deeply passed down into components got metadata of the table where it comes, plus a way to interact directly with the database.
 
 `const data = await SupaQ.select("users", "extended", { "is_pro": true })`
+*selects rows where 'is_pro' is true in table 'users' using the 'extended' query defined in config*
 
-`const name = data[0].name // type string` -> get a typed value
+`const name = data[0].name // type string`
+*get a typed value*
 
-`await data[1].set('age', '18') // type error : age is a number` -> update the row
+`await data[1].set('age', '18') // type error : age is a number`
+*update the row from client-side*
 
-`await data[2].delete()` -> delete the row (in the config you can opt-in for soft deletion)
+`await data[2].delete()`
+*delete the row (in the config you can opt-in for soft deletion)*
 
 
 
-## The rest
+### The rest
 
 Get access to the generated Supabase client :
 
